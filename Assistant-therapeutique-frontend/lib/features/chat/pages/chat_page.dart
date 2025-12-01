@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../services/chat_service.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -25,6 +26,7 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
   final List<ChatMessage> _messages = [];
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final ChatService _chatService = ChatService();
   bool _isTyping = false;
 
   @override
@@ -95,31 +97,23 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
     _addUserMessage(text);
     _messageController.clear();
 
-    // Simulation de réponse du bot
+    // Show typing indicator
     setState(() {
       _isTyping = true;
     });
 
-    Future.delayed(const Duration(seconds: 1), () {
+    // Send message to AI server
+    _chatService.sendMessage(text).then((response) {
       setState(() {
         _isTyping = false;
       });
-      _handleBotResponse(text);
+      _addBotMessage(response);
+    }).catchError((error) {
+      setState(() {
+        _isTyping = false;
+      });
+      _addBotMessage('Désolé, une erreur s\'est produite. Veuillez réessayer.');
     });
-  }
-
-  void _handleBotResponse(String userMessage) {
-    String response = 'Je comprends que tu te sens comme ça. N\'oublie pas de prendre soin de toi !';
-    
-    if (userMessage.toLowerCase().contains('triste') || userMessage.toLowerCase().contains('mal')) {
-      response = 'Je suis désolé que tu te sentes comme ça. Souviens-toi que les émotions difficiles passent avec le temps. Peut-être qu\'une petite marche ou parler à un proche pourrait t\'aider ?';
-    } else if (userMessage.toLowerCase().contains('heureux') || userMessage.toLowerCase().contains('content')) {
-      response = 'C\'est génial ! Profite de ce moment positif. Peut-être veux-tu noter ce qui te rend heureux pour t\'en souvenir plus tard ?';
-    } else if (userMessage.toLowerCase().contains('stress')) {
-      response = 'Le stress peut être difficile à gérer. As-tu essayé la respiration profonde ? Inspire pendant 4 secondes, retiens ton souffle 4 secondes, expire 6 secondes. Ça peut aider !';
-    }
-
-    _addBotMessage(response);
   }
 
   void _showQuickReplies() {
