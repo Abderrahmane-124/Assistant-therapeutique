@@ -13,7 +13,9 @@ class QuoteService {
   Future<Quote> fetchRandomQuote() async {
     try {
       final response = await http.get(
-        Uri.parse('$_baseUrl/random?tags=inspirational,life,motivational,wisdom'),
+        Uri.parse(
+          '$_baseUrl/random?tags=inspirational,life,motivational,wisdom',
+        ),
       );
 
       if (response.statusCode == 200) {
@@ -25,7 +27,8 @@ class QuoteService {
     } catch (e) {
       // Citation de secours en cas d'erreur
       return Quote(
-        content: 'La vie est ce qui arrive pendant que tu es occupé à faire d\'autres plans.',
+        content:
+            'La vie est ce qui arrive pendant que tu es occupé à faire d\'autres plans.',
         author: 'John Lennon',
         tags: ['life', 'inspirational'],
       );
@@ -68,7 +71,7 @@ class QuoteService {
   Future<void> addToFavorites(Quote quote) async {
     final prefs = await SharedPreferences.getInstance();
     final favoritesJson = prefs.getStringList(_favoriteQuotesKey) ?? [];
-    
+
     final quoteJson = json.encode(quote.toJson());
     if (!favoritesJson.contains(quoteJson)) {
       favoritesJson.add(quoteJson);
@@ -80,7 +83,7 @@ class QuoteService {
   Future<void> removeFromFavorites(Quote quote) async {
     final prefs = await SharedPreferences.getInstance();
     final favoritesJson = prefs.getStringList(_favoriteQuotesKey) ?? [];
-    
+
     final quoteJson = json.encode(quote.toJson());
     favoritesJson.remove(quoteJson);
     await prefs.setStringList(_favoriteQuotesKey, favoritesJson);
@@ -98,7 +101,7 @@ class QuoteService {
   Future<List<Quote>> getFavoriteQuotes() async {
     final prefs = await SharedPreferences.getInstance();
     final favoritesJson = prefs.getStringList(_favoriteQuotesKey) ?? [];
-    
+
     return favoritesJson
         .map((quoteJson) => Quote.fromJson(json.decode(quoteJson)))
         .toList();

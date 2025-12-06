@@ -21,6 +21,3 @@ class TipsBox extends StatelessWidget {
     );
   }
 }
-
-
-

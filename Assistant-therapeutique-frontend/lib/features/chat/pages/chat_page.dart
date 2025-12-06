@@ -20,7 +20,8 @@ class ChatMessage {
   });
 }
 
-class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin {
+class _ChatPageState extends State<ChatPage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   final List<ChatMessage> _messages = [];
@@ -28,6 +29,7 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
   final ScrollController _scrollController = ScrollController();
   final ChatService _chatService = ChatService();
   bool _isTyping = false;
+  int? _currentConversationId;
 
   @override
   void initState() {
@@ -38,16 +40,15 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
     );
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut,
-      ),
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
 
     _animationController.forward();
 
     // Message de bienvenue automatique
-    _addBotMessage('Bonjour ! Je suis ton assistant MoodMat. Comment puis-je t\'aider aujourd\'hui ?');
+    _addBotMessage(
+      'Bonjour ! Je suis ton assistant MoodMate. Comment puis-je t\'aider aujourd\'hui ?',
+    );
   }
 
   @override
@@ -60,37 +61,35 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
 
   void _addBotMessage(String text) {
     setState(() {
-      _messages.add(ChatMessage(
-        text: text,
-        isUser: false,
-        timestamp: DateTime.now(),
-      ));
+      _messages.add(
+        ChatMessage(text: text, isUser: false, timestamp: DateTime.now()),
+      );
     });
     _scrollToBottom();
   }
 
   void _addUserMessage(String text) {
     setState(() {
-      _messages.add(ChatMessage(
-        text: text,
-        isUser: true,
-        timestamp: DateTime.now(),
-      ));
+      _messages.add(
+        ChatMessage(text: text, isUser: true, timestamp: DateTime.now()),
+      );
     });
     _scrollToBottom();
   }
 
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
     });
   }
 
-  void _sendMessage() {
+  void _sendMessage() async {
     final text = _messageController.text.trim();
     if (text.isEmpty) return;
 
@@ -102,18 +101,42 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
       _isTyping = true;
     });
 
-    // Send message to AI server
-    _chatService.sendMessage(text).then((response) {
+    try {
+      // Send message to backend
+      final result = await _chatService.sendMessage(
+        conversationId: _currentConversationId,
+        message: text,
+        conversationTitle: _currentConversationId == null ? 'Nouvelle conversation' : null,
+      );
+
       setState(() {
         _isTyping = false;
       });
-      _addBotMessage(response);
-    }).catchError((error) {
+
+      if (result['success'] == true) {
+        // Update conversation ID if it's a new conversation
+        if (_currentConversationId == null && result['conversation'] != null) {
+          _currentConversationId = result['conversation'].id;
+        }
+
+        // Get the last message from the conversation (AI response)
+        // You'll need to extract the AI response from the result
+        // This depends on your backend response structure
+        _addBotMessage('Réponse du serveur reçue'); // TODO: Extract actual AI response
+      } else {
+        _addBotMessage(
+          'Désolé, une erreur s\'est produite: ${result['message'] ?? 'Erreur inconnue'}',
+        );
+      }
+    } catch (error) {
       setState(() {
         _isTyping = false;
       });
-      _addBotMessage('Désolé, une erreur s\'est produite. Veuillez réessayer.');
-    });
+      _addBotMessage(
+        'Désolé, une erreur s\'est produite. Veuillez réessayer.',
+      );
+      debugPrint('Error sending message: $error');
+    }
   }
 
   void _showQuickReplies() {
@@ -131,10 +154,7 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
             children: [
               const Text(
                 'Messages rapides',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
               Wrap(
@@ -173,10 +193,7 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
         ),
         child: Text(
           text,
-          style: TextStyle(
-            color: Colors.blue[800],
-            fontSize: 12,
-          ),
+          style: TextStyle(color: Colors.blue[800], fontSize: 12),
         ),
       ),
     );
@@ -197,14 +214,18 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
           children: [
             CircleAvatar(
               backgroundColor: Color(0xFF667EEA),
-              child: Icon(Icons.psychology_outlined, color: Colors.white, size: 20),
+              child: Icon(
+                Icons.psychology_outlined,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
             SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Assistant MoodMat',
+                  'Assistant MoodMate',
                   style: TextStyle(
                     color: Colors.black87,
                     fontSize: 16,
@@ -213,10 +234,7 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
                 ),
                 Text(
                   'En ligne',
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 12,
-                  ),
+                  style: TextStyle(color: Colors.green, fontSize: 12),
                 ),
               ],
             ),
@@ -258,7 +276,8 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: Row(
-        mainAxisAlignment: message.isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment:
+            message.isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!message.isUser)
@@ -269,14 +288,19 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
                 color: const Color(0xFF667EEA),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: const Icon(Icons.psychology_outlined, color: Colors.white, size: 16),
+              child: const Icon(
+                Icons.psychology_outlined,
+                color: Colors.white,
+                size: 16,
+              ),
             ),
           const SizedBox(width: 8),
           Flexible(
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: message.isUser ? const Color(0xFF667EEA) : Colors.grey[100],
+                color:
+                    message.isUser ? const Color(0xFF667EEA) : Colors.grey[100],
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(16),
                   topRight: const Radius.circular(16),
@@ -321,7 +345,11 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
               color: const Color(0xFF667EEA),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: const Icon(Icons.psychology_outlined, color: Colors.white, size: 16),
+            child: const Icon(
+              Icons.psychology_outlined,
+              color: Colors.white,
+              size: 16,
+            ),
           ),
           const SizedBox(width: 8),
           Container(

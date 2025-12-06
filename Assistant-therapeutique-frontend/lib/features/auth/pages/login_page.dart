@@ -1,9 +1,71 @@
 import 'package:flutter/material.dart';
 import 'package:moodmate/features/home/pages/home_page.dart';
 import 'package:moodmate/features/auth/pages/register_page.dart';
+import 'package:moodmate/features/auth/services/auth_service.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _authService = AuthService();
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _handleLogin() async {
+    if (_usernameController.text.isEmpty || _passwordController.text.isEmpty) {
+      _showErrorDialog('Veuillez remplir tous les champs');
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    final result = await _authService.login(
+      _usernameController.text,
+      _passwordController.text,
+    );
+
+    setState(() => _isLoading = false);
+
+    if (result['success']) {
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomePage()),
+        );
+      }
+    } else {
+      _showErrorDialog(result['message']);
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Erreur'),
+            content: Text(message),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +78,7 @@ class LoginPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFFF9A9E), // rose
-              Color(0xFFFAD0C4), // pêche clair
-            ],
+            colors: [Color(0xFFFF9A9E), Color(0xFFFAD0C4)],
           ),
         ),
         child: SafeArea(
@@ -38,10 +97,7 @@ class LoginPage extends StatelessWidget {
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: LinearGradient(
-                            colors: [
-                              Color(0xFFFF6FD8),
-                              Color(0xFF3813C2),
-                            ],
+                            colors: [Color(0xFFFF6FD8), Color(0xFF3813C2)],
                           ),
                         ),
                         child: const Icon(
@@ -67,7 +123,9 @@ class LoginPage extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 24),
+                      horizontal: 20,
+                      vertical: 24,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(32),
@@ -93,15 +151,17 @@ class LoginPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 24),
 
-                        // Email
-                        const _AuthTextField(
-                          hintText: "name@example.com",
-                          keyboardType: TextInputType.emailAddress,
+                        // Username
+                        _AuthTextField(
+                          controller: _usernameController,
+                          hintText: "Username",
+                          keyboardType: TextInputType.text,
                         ),
                         const SizedBox(height: 12),
 
                         // Password
-                        const _AuthTextField(
+                        _AuthTextField(
+                          controller: _passwordController,
                           hintText: "Password",
                           obscureText: true,
                         ),
@@ -124,15 +184,7 @@ class LoginPage extends StatelessWidget {
                         SizedBox(
                           height: 48,
                           child: ElevatedButton(
-                            onPressed: () {
-                              // après vérif des identifiants, on va vers HomePage
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const HomePage(),
-                                ),
-                              );
-                            },
+                            onPressed: _isLoading ? null : _handleLogin,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: primaryPurple,
                               elevation: 0,
@@ -140,13 +192,23 @@ class LoginPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                             ),
-                            child: const Text(
-                              "Log in",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
+                            child:
+                                _isLoading
+                                    ? const SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                    : const Text(
+                                      "Log in",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                      ),
+                                    ),
                           ),
                         ),
 
@@ -155,9 +217,7 @@ class LoginPage extends StatelessWidget {
                         // "or"
                         Row(
                           children: [
-                            Expanded(
-                              child: Divider(color: Colors.grey[300]),
-                            ),
+                            Expanded(child: Divider(color: Colors.grey[300])),
                             const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
@@ -168,9 +228,7 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: Divider(color: Colors.grey[300]),
-                            ),
+                            Expanded(child: Divider(color: Colors.grey[300])),
                           ],
                         ),
 
@@ -218,7 +276,7 @@ class LoginPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Don’t have an account? ",
+                              "Don't have an account? ",
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey[600],
@@ -257,30 +315,34 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-/// petit TextField réutilisable
+/// TextField réutilisable
 class _AuthTextField extends StatelessWidget {
+  final TextEditingController controller;
   final String hintText;
   final bool obscureText;
   final TextInputType keyboardType;
 
   const _AuthTextField({
+    required this.controller,
     required this.hintText,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
-    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       obscureText: obscureText,
       keyboardType: keyboardType,
       decoration: InputDecoration(
         hintText: hintText,
         filled: true,
         fillColor: const Color(0xFFF4F5FB),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide.none,
@@ -289,4 +351,3 @@ class _AuthTextField extends StatelessWidget {
     );
   }
 }
-

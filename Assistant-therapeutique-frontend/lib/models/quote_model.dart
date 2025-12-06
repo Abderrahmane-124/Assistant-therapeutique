@@ -3,11 +3,7 @@ class Quote {
   final String author;
   final List<String> tags;
 
-  Quote({
-    required this.content,
-    required this.author,
-    required this.tags,
-  });
+  Quote({required this.content, required this.author, required this.tags});
 
   factory Quote.fromJson(Map<String, dynamic> json) {
     return Quote(
@@ -18,10 +14,6 @@ class Quote {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'content': content,
-      'author': author,
-      'tags': tags,
-    };
+    return {'content': content, 'author': author, 'tags': tags};
   }
 }

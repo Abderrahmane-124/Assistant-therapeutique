@@ -9,7 +9,8 @@ class DailyQuoteWidget extends StatefulWidget {
   State<DailyQuoteWidget> createState() => _DailyQuoteWidgetState();
 }
 
-class _DailyQuoteWidgetState extends State<DailyQuoteWidget> with SingleTickerProviderStateMixin {
+class _DailyQuoteWidgetState extends State<DailyQuoteWidget>
+    with SingleTickerProviderStateMixin {
   final QuoteService _quoteService = QuoteService();
   Quote? _currentQuote;
   bool _isLoading = true;
@@ -55,7 +56,7 @@ class _DailyQuoteWidgetState extends State<DailyQuoteWidget> with SingleTickerPr
   Future<void> _loadNewQuote() async {
     _animationController.reverse();
     await Future.delayed(const Duration(milliseconds: 300));
-    
+
     setState(() => _isLoading = true);
     try {
       final quote = await _quoteService.fetchRandomQuote();
@@ -110,10 +111,7 @@ class _DailyQuoteWidgetState extends State<DailyQuoteWidget> with SingleTickerPr
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Colors.amber[50]!,
-            Colors.orange[50]!,
-          ],
+          colors: [Colors.amber[50]!, Colors.orange[50]!],
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
@@ -167,7 +165,8 @@ class _DailyQuoteWidgetState extends State<DailyQuoteWidget> with SingleTickerPr
                       ),
                       child: Icon(
                         _isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: _isFavorite ? Colors.pink[600] : Colors.grey[600],
+                        color:
+                            _isFavorite ? Colors.pink[600] : Colors.grey[600],
                         size: 20,
                       ),
                     ),

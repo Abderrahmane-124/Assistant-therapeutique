@@ -78,9 +78,10 @@ class _GuidedBreathingPageState extends State<GuidedBreathingPage> {
     final progress = 1 - (remainingSeconds / totalSeconds);
 
     final double baseSize = 190;
-    final double size = currentPhaseIndex == 0
-        ? baseSize + 32 * progress
-        : currentPhaseIndex == 2
+    final double size =
+        currentPhaseIndex == 0
+            ? baseSize + 32 * progress
+            : currentPhaseIndex == 2
             ? baseSize + 32 * (1 - progress)
             : baseSize;
 
@@ -104,10 +105,7 @@ class _GuidedBreathingPageState extends State<GuidedBreathingPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFF7FAFF),
-              Color(0xFFE6F7F6),
-            ],
+            colors: [Color(0xFFF7FAFF), Color(0xFFE6F7F6)],
           ),
         ),
         child: Padding(
@@ -126,10 +124,7 @@ class _GuidedBreathingPageState extends State<GuidedBreathingPage> {
               const SizedBox(height: 4),
               const Text(
                 "Suis le rythme pour apaiser ton corps et ton esprit.",
-                style: TextStyle(
-                  color: Color(0xFF6B7A99),
-                  fontSize: 13,
-                ),
+                style: TextStyle(color: Color(0xFF6B7A99), fontSize: 13),
               ),
               const SizedBox(height: 30),
 
@@ -202,9 +197,7 @@ class _GuidedBreathingPageState extends State<GuidedBreathingPage> {
                   value: progress,
                   minHeight: 9,
                   backgroundColor: Colors.white.withOpacity(0.6),
-                  valueColor: const AlwaysStoppedAnimation(
-                    Color(0xFF32BFA6),
-                  ),
+                  valueColor: const AlwaysStoppedAnimation(Color(0xFF32BFA6)),
                 ),
               ),
 
@@ -284,4 +277,3 @@ class _BreathPhase {
 
   const _BreathPhase({required this.label, required this.seconds});
 }
-

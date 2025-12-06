@@ -48,10 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [
-                      Color(0xFF667EEA),
-                      Color(0xFF764BA2),
-                    ],
+                    colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
                   ),
                 ),
                 child: Container(
@@ -115,18 +112,11 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: const Color(0xFF667EEA),
-                width: 3,
-              ),
+              border: Border.all(color: const Color(0xFF667EEA), width: 3),
               color: const Color(0xFF667EEA).withOpacity(0.15),
             ),
             child: const Center(
-              child: Icon(
-                Icons.person,
-                size: 48,
-                color: Color(0xFF667EEA),
-              ),
+              child: Icon(Icons.person, size: 48, color: Color(0xFF667EEA)),
             ),
           ),
           const SizedBox(height: 20),
@@ -168,11 +158,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  Icons.verified,
-                  color: Color(0xFF667EEA),
-                  size: 14,
-                ),
+                Icon(Icons.verified, color: Color(0xFF667EEA), size: 14),
                 SizedBox(width: 6),
                 Text(
                   'Compte vérifié',
@@ -198,10 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF667EEA),
-            Color(0xFF764BA2),
-          ],
+          colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
@@ -225,11 +208,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: Colors.white,
                 ),
               ),
-              Icon(
-                Icons.insights,
-                color: Colors.white,
-                size: 20,
-              ),
+              Icon(Icons.insights, color: Colors.white, size: 20),
             ],
           ),
           const SizedBox(height: 20),
@@ -255,15 +234,9 @@ class _ProfilePageState extends State<ProfilePage> {
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.2),
             shape: BoxShape.circle,
-            border: Border.all(
-              color: Colors.white.withOpacity(0.3),
-            ),
+            border: Border.all(color: Colors.white.withOpacity(0.3)),
           ),
-          child: Icon(
-            icon,
-            color: Colors.white,
-            size: 24,
-          ),
+          child: Icon(icon, color: Colors.white, size: 24),
         ),
         const SizedBox(height: 12),
         Text(
@@ -370,11 +343,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Icon(
-          icon,
-          color: color,
-          size: 20,
-        ),
+        child: Icon(icon, color: color, size: 20),
       ),
       title: Text(
         title,
@@ -386,10 +355,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       subtitle: Text(
         subtitle,
-        style: TextStyle(
-          fontSize: 12,
-          color: Colors.grey[600],
-        ),
+        style: TextStyle(fontSize: 12, color: Colors.grey[600]),
       ),
       trailing: Container(
         width: 32,
@@ -411,10 +377,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildDivider() {
     return Padding(
       padding: const EdgeInsets.only(left: 72, right: 16),
-      child: Divider(
-        height: 1,
-        color: Colors.grey[200],
-      ),
+      child: Divider(height: 1, color: Colors.grey[200]),
     );
   }
 
@@ -466,36 +429,40 @@ class _ProfilePageState extends State<ProfilePage> {
                 icon: Icons.phone_outlined,
                 label: 'Téléphone',
                 value: _phone,
-                onEdit: () => _editTextField(
-                  title: "Téléphone",
-                  initialValue: _phone == "Ajouter un numéro" ? "" : _phone,
-                  keyboardType: TextInputType.phone,
-                  onSaved: (value) {
-                    setState(() {
-                      _phone = value.isEmpty ? "Ajouter un numéro" : value;
-                    });
-                  },
-                ),
+                onEdit:
+                    () => _editTextField(
+                      title: "Téléphone",
+                      initialValue: _phone == "Ajouter un numéro" ? "" : _phone,
+                      keyboardType: TextInputType.phone,
+                      onSaved: (value) {
+                        setState(() {
+                          _phone = value.isEmpty ? "Ajouter un numéro" : value;
+                        });
+                      },
+                    ),
               ),
               _buildDivider(),
               _buildInfoItem(
                 icon: Icons.cake_outlined,
                 label: 'Date de naissance',
                 value: _birthDate,
-                onEdit: () => _editTextField(
-                  title: "Date de naissance",
-                  initialValue: _birthDate == "Ajouter ta date de naissance"
-                      ? ""
-                      : _birthDate,
-                  keyboardType: TextInputType.datetime,
-                  onSaved: (value) {
-                    setState(() {
-                      _birthDate = value.isEmpty
-                          ? "Ajouter ta date de naissance"
-                          : value;
-                    });
-                  },
-                ),
+                onEdit:
+                    () => _editTextField(
+                      title: "Date de naissance",
+                      initialValue:
+                          _birthDate == "Ajouter ta date de naissance"
+                              ? ""
+                              : _birthDate,
+                      keyboardType: TextInputType.datetime,
+                      onSaved: (value) {
+                        setState(() {
+                          _birthDate =
+                              value.isEmpty
+                                  ? "Ajouter ta date de naissance"
+                                  : value;
+                        });
+                      },
+                    ),
               ),
             ],
           ),
@@ -521,11 +488,7 @@ class _ProfilePageState extends State<ProfilePage> {
               color: const Color(0xFF667EEA).withOpacity(0.1),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(
-              icon,
-              color: const Color(0xFF667EEA),
-              size: 20,
-            ),
+            child: Icon(icon, color: const Color(0xFF667EEA), size: 20),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -590,9 +553,7 @@ class _ProfilePageState extends State<ProfilePage> {
           content: TextField(
             controller: controller,
             keyboardType: keyboardType,
-            decoration: InputDecoration(
-              hintText: "Entrez $title",
-            ),
+            decoration: InputDecoration(hintText: "Entrez $title"),
           ),
           actions: [
             TextButton(
@@ -636,10 +597,7 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(width: 8),
             Text(
               'Se déconnecter',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
           ],
         ),

@@ -5,7 +5,10 @@ import 'package:moodmate/features/mood/pages/mood_tracking_page.dart';
 import 'package:moodmate/features/auth/pages/profil.dart'; // Import de la page profil
 import 'package:moodmate/features/auth/widgets/daily_quote_widget.dart';
 import 'package:moodmate/features/home/pages/guided_breathing_page.dart';
+import 'package:moodmate/features/mood/pages/mood_history_page.dart';
 import 'package:moodmate/features/home/pages/meditation_page.dart';
+import 'package:moodmate/models/mood_model.dart';
+import 'package:moodmate/services/mood_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,16 +23,9 @@ class _HomePageState extends State<HomePage>
   late Animation<double> _fadeAnimation;
   late Animation<double> _slideAnimation;
 
-  // Données simulées pour l'historique des humeurs
-  final List<Map<String, dynamic>> _moodHistory = [
-    {'day': 'Lun', 'mood': 4, 'color': Colors.green},
-    {'day': 'Mar', 'mood': 3, 'color': Colors.orange},
-    {'day': 'Mer', 'mood': 2, 'color': Colors.blue},
-    {'day': 'Jeu', 'mood': 4, 'color': Colors.green},
-    {'day': 'Ven', 'mood': 5, 'color': Colors.pink},
-    {'day': 'Sam', 'mood': 3, 'color': Colors.orange},
-    {'day': 'Dim', 'mood': 4, 'color': Colors.green},
-  ];
+  // Replace simulated data with a Future for real data
+  final MoodService _moodService = MoodService();
+  late Future<List<Mood>> _moodsFuture;
 
   String _selectedFilter = 'Semaine';
   final List<String> _filters = ['Semaine', 'Mois', 'Année'];
@@ -37,6 +33,8 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    _loadMoods(); // Load moods from the backend
+
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 800),
@@ -59,6 +57,12 @@ class _HomePageState extends State<HomePage>
     _animationController.forward();
   }
 
+  void _loadMoods() {
+    setState(() {
+      _moodsFuture = _moodService.getMoods();
+    });
+  }
+
   @override
   void dispose() {
     _animationController.dispose();
@@ -69,13 +73,11 @@ class _HomePageState extends State<HomePage>
     Navigator.push(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const MoodTrackingPage(),
+        pageBuilder:
+            (context, animation, secondaryAnimation) =>
+                const MoodTrackingPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return FadeTransition(
-            opacity: animation,
-            child: child,
-          );
+          return FadeTransition(opacity: animation, child: child);
         },
       ),
     );
@@ -85,14 +87,16 @@ class _HomePageState extends State<HomePage>
     Navigator.push(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const JournalPage(),
+        pageBuilder:
+            (context, animation, secondaryAnimation) => const JournalPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;
           const curve = Curves.easeInOut;
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween = Tween(
+            begin: begin,
+            end: end,
+          ).chain(CurveTween(curve: curve));
           return SlideTransition(
             position: animation.drive(tween),
             child: child,
@@ -106,15 +110,12 @@ class _HomePageState extends State<HomePage>
     Navigator.push(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const ChatPage(),
+        pageBuilder:
+            (context, animation, secondaryAnimation) => const ChatPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return ScaleTransition(
             scale: Tween<double>(begin: 0.0, end: 1.0).animate(
-              CurvedAnimation(
-                parent: animation,
-                curve: Curves.easeInOutBack,
-              ),
+              CurvedAnimation(parent: animation, curve: Curves.easeInOutBack),
             ),
             child: child,
           );
@@ -127,14 +128,16 @@ class _HomePageState extends State<HomePage>
     Navigator.push(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const ProfilePage(),
+        pageBuilder:
+            (context, animation, secondaryAnimation) => const ProfilePage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(0.0, 1.0);
           const end = Offset.zero;
           const curve = Curves.easeInOut;
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween = Tween(
+            begin: begin,
+            end: end,
+          ).chain(CurveTween(curve: curve));
           return SlideTransition(
             position: animation.drive(tween),
             child: child,
@@ -162,8 +165,11 @@ class _HomePageState extends State<HomePage>
           children: [
             CircleAvatar(
               backgroundColor: Color(0xFF667EEA),
-              child: Icon(Icons.psychology_outlined,
-                  color: Colors.white, size: 20),
+              child: Icon(
+                Icons.psychology_outlined,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
             SizedBox(width: 12),
             Text(
@@ -291,8 +297,10 @@ class _HomePageState extends State<HomePage>
             children: [
               Expanded(
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
@@ -303,10 +311,7 @@ class _HomePageState extends State<HomePage>
                     children: [
                       Text(
                         "Ajouter une note",
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 14,
-                        ),
+                        style: TextStyle(color: Colors.grey[600], fontSize: 14),
                       ),
                       Icon(Icons.add, color: Colors.grey[600], size: 18),
                     ],
@@ -318,7 +323,9 @@ class _HomePageState extends State<HomePage>
                 onTap: _navigateToMoodTracking,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 20, vertical: 12),
+                    horizontal: 20,
+                    vertical: 12,
+                  ),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
@@ -380,22 +387,44 @@ class _HomePageState extends State<HomePage>
           ),
           const SizedBox(height: 16),
           Row(
-            children: _filters.map((filter) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 12),
-                child: _buildHistoryFilter(filter,
-                    isActive: _selectedFilter == filter),
-              );
-            }).toList(),
+            children:
+                _filters.map((filter) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: _buildHistoryFilter(
+                      filter,
+                      isActive: _selectedFilter == filter,
+                    ),
+                  );
+                }).toList(),
           ),
           const SizedBox(height: 20),
-          _buildMoodChart(),
+          FutureBuilder<List<Mood>>(
+            future: _moodsFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(
+                  child: Text('No mood data found for this week.'),
+                );
+              }
+              return _buildMoodChart(snapshot.data!);
+            },
+          ),
           const SizedBox(height: 16),
           const Divider(),
           const SizedBox(height: 12),
           GestureDetector(
             onTap: () {
-              // Navigation vers la page de détail de l'historique
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MoodHistoryPage(),
+                ),
+              );
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -417,51 +446,83 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildMoodChart() {
+  Widget _buildMoodChart(List<Mood> moods) {
+    // Helper to get a color based on mood label
+    Color getColorForMood(String moodLabel) {
+      if (moodLabel.contains('Triste')) return Colors.blue;
+      if (moodLabel.contains('Neutre')) return Colors.grey;
+      if (moodLabel.contains('Content')) return Colors.orange;
+      if (moodLabel.contains('Heureux')) return Colors.green;
+      if (moodLabel.contains('Épanoui')) return Colors.pink;
+      return Colors.grey;
+    }
+
+    // This is a simplified example. You might want to process the moods
+    // to fit them into the 7 days of the week, group them, etc.
+    // For now, we'll just display the latest 7 moods.
+    final recentMoods = moods.length > 7 ? moods.sublist(0, 7) : moods;
+
     return SizedBox(
       height: 80,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.end,
-        children: _moodHistory.map((moodData) {
-          return Column(
-            children: [
-              Text(
-                moodData['day'],
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Container(
-                width: 12,
-                height: moodData['mood'] * 10.0,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      (moodData['color'] as Color).withOpacity(0.8),
-                      (moodData['color'] as Color).withOpacity(0.4),
-                    ],
+        children:
+            recentMoods.map((mood) {
+              // You'll need a more robust way to get an 'intensity' value from your mood string.
+              // For now, let's use a placeholder value.
+              final intensity = 3.0; // Placeholder
+              final day =
+                  mood.createdAt != null
+                      ? [
+                        'Lun',
+                        'Mar',
+                        'Mer',
+                        'Jeu',
+                        'Ven',
+                        'Sam',
+                        'Dim',
+                      ][mood.createdAt!.weekday - 1]
+                      : 'N/A';
+
+              return Column(
+                children: [
+                  Text(
+                    day,
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                '${moodData['mood']}',
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          );
-        }).toList(),
+                  const SizedBox(height: 8),
+                  Container(
+                    width: 12,
+                    height: intensity * 10.0,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          getColorForMood(mood.mood).withOpacity(0.8),
+                          getColorForMood(mood.mood).withOpacity(0.4),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${intensity.toInt()}',
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              );
+            }).toList(),
       ),
     );
   }
@@ -529,18 +590,12 @@ class _HomePageState extends State<HomePage>
               children: [
                 Text(
                   "Exprime ce que tu ressens aujourd'hui",
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 14,
-                  ),
+                  style: TextStyle(color: Colors.grey[600], fontSize: 14),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   "500 caractères maximum",
-                  style: TextStyle(
-                    color: Colors.grey[400],
-                    fontSize: 12,
-                  ),
+                  style: TextStyle(color: Colors.grey[400], fontSize: 12),
                 ),
               ],
             ),
@@ -640,10 +695,7 @@ class _HomePageState extends State<HomePage>
                     children: [
                       Text(
                         "●●●",
-                        style: TextStyle(
-                          color: Colors.grey[500],
-                          fontSize: 10,
-                        ),
+                        style: TextStyle(color: Colors.grey[500], fontSize: 10),
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -657,18 +709,12 @@ class _HomePageState extends State<HomePage>
                       const SizedBox(height: 2),
                       Text(
                         "N'oublie pas de prendre soin de toi",
-                        style: TextStyle(
-                          color: Colors.grey[500],
-                          fontSize: 12,
-                        ),
+                        style: TextStyle(color: Colors.grey[500], fontSize: 12),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         "●●●",
-                        style: TextStyle(
-                          color: Colors.grey[500],
-                          fontSize: 10,
-                        ),
+                        style: TextStyle(color: Colors.grey[500], fontSize: 10),
                       ),
                     ],
                   ),
@@ -720,19 +766,17 @@ class _HomePageState extends State<HomePage>
         Row(
           children: [
             Expanded(
-  child: _buildRecommendationCard(
-    "Méditation 2 min",
-    Icons.self_improvement,
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => const MeditationPage(),
-        ),
-      );
-    },
-  ),
-),
+              child: _buildRecommendationCard(
+                "Méditation 2 min",
+                Icons.self_improvement,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const MeditationPage()),
+                  );
+                },
+              ),
+            ),
 
             const SizedBox(width: 12),
             Expanded(
@@ -765,8 +809,11 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildRecommendationCard(String title, IconData icon,
-      {VoidCallback? onTap}) {
+  Widget _buildRecommendationCard(
+    String title,
+    IconData icon, {
+    VoidCallback? onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -792,11 +839,7 @@ class _HomePageState extends State<HomePage>
                 color: Colors.green[50],
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Icon(
-                icon,
-                color: Colors.green[600],
-                size: 20,
-              ),
+              child: Icon(icon, color: Colors.green[600], size: 20),
             ),
             const SizedBox(height: 12),
             Text(

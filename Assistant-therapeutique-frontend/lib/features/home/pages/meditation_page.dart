@@ -93,10 +93,7 @@ class _MeditationPageState extends State<MeditationPage>
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFFF5F9FF),
-              Color(0xFFE8F7FA),
-            ],
+            colors: [Color(0xFFF5F9FF), Color(0xFFE8F7FA)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -119,10 +116,7 @@ class _MeditationPageState extends State<MeditationPage>
               const SizedBox(height: 6),
               Text(
                 "Installe-toi confortablement et respire calmement.",
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 14,
-                ),
+                style: TextStyle(color: Colors.grey[700], fontSize: 14),
                 textAlign: TextAlign.center,
               ),
 
@@ -144,18 +138,14 @@ class _MeditationPageState extends State<MeditationPage>
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             gradient: const RadialGradient(
-                              colors: [
-                                Color(0xFF89D4C9),
-                                Color(0xFF5BB9A8),
-                              ],
+                              colors: [Color(0xFF89D4C9), Color(0xFF5BB9A8)],
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color:
-                                    const Color(0xFF53B6A1).withOpacity(0.4),
+                                color: const Color(0xFF53B6A1).withOpacity(0.4),
                                 blurRadius: 30,
                                 spreadRadius: 4,
-                              )
+                              ),
                             ],
                           ),
                           child: Center(
@@ -197,9 +187,7 @@ class _MeditationPageState extends State<MeditationPage>
                     ),
                     child: Text(
                       isRunning ? "Pause" : "Démarrer",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -218,9 +206,7 @@ class _MeditationPageState extends State<MeditationPage>
                     ),
                     child: const Text(
                       "Réinitialiser",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],

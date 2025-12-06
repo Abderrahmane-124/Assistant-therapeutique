@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:moodmate/features/auth/services/auth_service.dart'; // AuthService
+import 'package:moodmate/services/mood_service.dart'; // MoodService
+import 'package:moodmate/models/mood_model.dart'; // Mood model
 
 class MoodTrackingPage extends StatefulWidget {
-  const MoodTrackingPage({super.key});
+  final Mood? moodToEdit;
+
+  const MoodTrackingPage({super.key, this.moodToEdit});
 
   @override
   State<MoodTrackingPage> createState() => _MoodTrackingPageState();
@@ -12,14 +17,11 @@ class MoodOption {
   final String label;
   final Color color;
 
-  MoodOption({
-    required this.emoji,
-    required this.label,
-    required this.color,
-  });
+  MoodOption({required this.emoji, required this.label, required this.color});
 }
 
-class _MoodTrackingPageState extends State<MoodTrackingPage> with SingleTickerProviderStateMixin {
+class _MoodTrackingPageState extends State<MoodTrackingPage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
@@ -33,33 +35,83 @@ class _MoodTrackingPageState extends State<MoodTrackingPage> with SingleTickerPr
   ];
 
   MoodOption? _selectedMood;
-  int _selectedIntensity = 3;
+  int _selectedIntensity = 3; // 1 to 5
   final TextEditingController _noteController = TextEditingController();
   bool _isSubmitting = false;
+  bool _isEditMode = false;
+
+  final MoodService _moodService = MoodService(); // Instantiate MoodService
+  int? _currentUserId; // To store the logged-in user's ID
 
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 500),
     );
-
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeInOut),
-      ),
-    );
-
-    _scaleAnimation = Tween<double>(begin: 0.9, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.elasticOut,
-      ),
-    );
-
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(_animationController);
+    _scaleAnimation = Tween<double>(
+      begin: 0.8,
+      end: 1.0,
+    ).animate(_animationController);
     _animationController.forward();
+    if (widget.moodToEdit != null) {
+      _isEditMode = true;
+      _initializeFromMood(widget.moodToEdit!);
+    }
+    _loadUserId(); // Charger l'ID utilisateur au démarrage
+  }
+
+  void _initializeFromMood(Mood mood) {
+    // This is a simplistic parsing. A more robust solution would be to store
+    // label and intensity separately in the model.
+    final moodParts = mood.mood.split(' (');
+    final label = moodParts[0];
+    final intensityLabel =
+        moodParts.length > 1 ? moodParts[1].replaceAll(')', '') : null;
+
+    setState(() {
+      _selectedMood = _moodOptions.firstWhere(
+        (option) => option.label == label,
+        orElse: () => _moodOptions[1], // Default to 'Neutre' if not found
+      );
+
+      if (intensityLabel != null) {
+        _selectedIntensity = _getIntensityValue(intensityLabel);
+      }
+    });
+  }
+
+  int _getIntensityValue(String intensityLabel) {
+    switch (intensityLabel) {
+      case 'Très légère':
+        return 1;
+      case 'Légère':
+        return 2;
+      case 'Moyenne':
+        return 3;
+      case 'Intense':
+        return 4;
+      case 'Très intense':
+        return 5;
+      default:
+        return 3;
+    }
+  }
+
+  // --- Correction ici : appel de la méthode statique ---
+  Future<void> _loadUserId() async {
+    _currentUserId = await AuthService.getUserId(); // ✅ méthode statique
+    if (_currentUserId == null && mounted) {
+      _showErrorDialog(
+        'Erreur',
+        'ID utilisateur non trouvé. Veuillez vous reconnecter.',
+      );
+    }
   }
 
   @override
@@ -69,9 +121,19 @@ class _MoodTrackingPageState extends State<MoodTrackingPage> with SingleTickerPr
     super.dispose();
   }
 
-  void _submitMood() {
+  void _submitMood() async {
     if (_selectedMood == null) {
-      _showErrorDialog('Sélectionnez votre humeur', 'Veuillez choisir une émotion pour continuer.');
+      _showErrorDialog(
+        'Sélectionnez votre humeur',
+        'Veuillez choisir une émotion pour continuer.',
+      );
+      return;
+    }
+    if (_currentUserId == null) {
+      _showErrorDialog(
+        'Erreur',
+        'ID utilisateur non disponible. Veuillez réessayer.',
+      );
       return;
     }
 
@@ -79,129 +141,154 @@ class _MoodTrackingPageState extends State<MoodTrackingPage> with SingleTickerPr
       _isSubmitting = true;
     });
 
-    // Simulation de sauvegarde
-    Future.delayed(const Duration(seconds: 2), () {
+    try {
+      final Mood moodToSubmit = Mood(
+        id: _isEditMode ? widget.moodToEdit!.id : null,
+        mood:
+            '${_selectedMood!.label} (${_getIntensityLabel(_selectedIntensity)})',
+        userId: _currentUserId!,
+        createdAt: _isEditMode ? widget.moodToEdit!.createdAt : null,
+      );
+
+      final result =
+          _isEditMode
+              ? await _moodService.updateMood(moodToSubmit)
+              : await _moodService.saveMood(moodToSubmit);
+
       setState(() {
         _isSubmitting = false;
       });
-      _showSuccessDialog();
-    });
+
+      if (result['success'] == true && mounted) {
+        _showSuccessDialog(isUpdate: _isEditMode);
+      } else if (mounted) {
+        _showErrorDialog(
+          'Erreur d\'enregistrement',
+          result['message'] ??
+              'Une erreur est survenue lors de l\'enregistrement.',
+        );
+      }
+    } catch (e) {
+      setState(() {
+        _isSubmitting = false;
+      });
+      if (mounted) {
+        _showErrorDialog(
+          'Erreur',
+          'Impossible d\'enregistrer l\'humeur : ${e.toString()}',
+        );
+      }
+    }
   }
 
   void _showErrorDialog(String title, String message) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  color: Colors.orange[600],
-                  size: 48,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+      builder:
+          (context) => Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    color: Colors.orange[600],
+                    size: 48,
                   ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  message,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange[600],
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                  const SizedBox(height: 16),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Compris'),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 12),
+                  Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange[600],
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('Compris'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        );
-      },
     );
   }
 
-  void _showSuccessDialog() {
+  void _showSuccessDialog({bool isUpdate = false}) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.check_circle,
-                  color: Colors.green[600],
-                  size: 60,
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Humeur enregistrée !',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  'Vous vous sentez ${_selectedMood!.label.toLowerCase()} aujourd\'hui.',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green[600],
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+      builder:
+          (context) => Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.check_circle, color: Colors.green[600], size: 60),
+                  const SizedBox(height: 16),
+                  Text(
+                    isUpdate ? 'Humeur mise à jour !' : 'Humeur enregistrée !',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Retour à l\'accueil'),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 12),
+                  Text(
+                    'Vous vous sentez ${_selectedMood!.label.toLowerCase()} aujourd\'hui.',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green[600],
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                        Navigator.of(
+                          context,
+                        ).pop(); // Go back from the tracking page
+                      },
+                      child: const Text('Retour'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        );
-      },
     );
   }
 
@@ -218,39 +305,25 @@ class _MoodTrackingPageState extends State<MoodTrackingPage> with SingleTickerPr
         ),
         title: const Text(
           'Mon Humeur du Jour',
-          style: TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
         ),
       ),
-      body: AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, child) {
-          return FadeTransition(
-            opacity: _fadeAnimation,
-            child: Transform.scale(
-              scale: _scaleAnimation.value,
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildDateSection(),
-                    const SizedBox(height: 32),
-                    _buildMoodSelection(),
-                    const SizedBox(height: 32),
-                    _buildIntensitySection(),
-                    const SizedBox(height: 32),
-                    _buildNoteSection(),
-                    const SizedBox(height: 40),
-                    _buildSubmitButton(),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildDateSection(),
+            const SizedBox(height: 32),
+            _buildMoodSelection(),
+            const SizedBox(height: 32),
+            _buildIntensitySection(),
+            const SizedBox(height: 32),
+            _buildNoteSection(),
+            const SizedBox(height: 40),
+            _buildSubmitButton(),
+          ],
+        ),
       ),
     );
   }
@@ -281,10 +354,7 @@ class _MoodTrackingPageState extends State<MoodTrackingPage> with SingleTickerPr
           const SizedBox(height: 8),
           Text(
             '${_getWeekday()}, ${DateTime.now().day} ${_getMonth()} ${DateTime.now().year}',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
-            ),
+            style: TextStyle(fontSize: 14, color: Colors.grey[600]),
           ),
         ],
       ),
@@ -307,9 +377,7 @@ class _MoodTrackingPageState extends State<MoodTrackingPage> with SingleTickerPr
         Wrap(
           spacing: 12,
           runSpacing: 12,
-          children: _moodOptions.map((mood) {
-            return _buildMoodOption(mood);
-          }).toList(),
+          children: _moodOptions.map(_buildMoodOption).toList(),
         ),
       ],
     );
@@ -333,20 +401,20 @@ class _MoodTrackingPageState extends State<MoodTrackingPage> with SingleTickerPr
             color: isSelected ? mood.color : Colors.transparent,
             width: 2,
           ),
-          boxShadow: isSelected ? [
-            BoxShadow(
-              color: mood.color.withOpacity(0.3),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ] : null,
+          boxShadow:
+              isSelected
+                  ? [
+                    BoxShadow(
+                      color: mood.color.withOpacity(0.3),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ]
+                  : null,
         ),
         child: Column(
           children: [
-            Text(
-              mood.emoji,
-              style: const TextStyle(fontSize: 32),
-            ),
+            Text(mood.emoji, style: const TextStyle(fontSize: 32)),
             const SizedBox(height: 8),
             Text(
               mood.label,
@@ -442,7 +510,8 @@ class _MoodTrackingPageState extends State<MoodTrackingPage> with SingleTickerPr
             controller: _noteController,
             maxLines: 4,
             decoration: const InputDecoration(
-              hintText: 'Pourquoi vous sentez-vous ainsi ? Qu\'est-ce qui influence votre humeur aujourd\'hui ?',
+              hintText:
+                  'Pourquoi vous sentez-vous ainsi ? Qu\'est-ce qui influence votre humeur aujourd\'hui ?',
               hintStyle: TextStyle(color: Colors.grey),
               border: InputBorder.none,
               contentPadding: EdgeInsets.all(16),
@@ -467,51 +536,79 @@ class _MoodTrackingPageState extends State<MoodTrackingPage> with SingleTickerPr
           elevation: 2,
         ),
         onPressed: _isSubmitting ? null : _submitMood,
-        child: _isSubmitting
-            ? const SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
-              )
-            : const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.emoji_emotions, size: 20),
-                  SizedBox(width: 8),
-                  Text(
-                    'ENREGISTRER MON HUMEUR',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+        child:
+            _isSubmitting
+                ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   ),
-                ],
-              ),
+                )
+                : const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.emoji_emotions, size: 20),
+                    SizedBox(width: 8),
+                    Text(
+                      'ENREGISTRER MON HUMEUR',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
       ),
     );
   }
 
   String _getWeekday() {
-    final weekdays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+    final weekdays = [
+      'Lundi',
+      'Mardi',
+      'Mercredi',
+      'Jeudi',
+      'Vendredi',
+      'Samedi',
+      'Dimanche',
+    ];
     return weekdays[DateTime.now().weekday - 1];
   }
 
   String _getMonth() {
-    final months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+    final months = [
+      'janvier',
+      'février',
+      'mars',
+      'avril',
+      'mai',
+      'juin',
+      'juillet',
+      'août',
+      'septembre',
+      'octobre',
+      'novembre',
+      'décembre',
+    ];
     return months[DateTime.now().month - 1];
   }
 
   String _getIntensityLabel(int intensity) {
     switch (intensity) {
-      case 1: return 'Très légère';
-      case 2: return 'Légère';
-      case 3: return 'Moyenne';
-      case 4: return 'Intense';
-      case 5: return 'Très intense';
-      default: return 'Moyenne';
+      case 1:
+        return 'Très légère';
+      case 2:
+        return 'Légère';
+      case 3:
+        return 'Moyenne';
+      case 4:
+        return 'Intense';
+      case 5:
+        return 'Très intense';
+      default:
+        return 'Moyenne';
     }
   }
 }

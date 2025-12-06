@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:moodmate/features/auth/pages/login_page.dart';
-import 'package:moodmate/features/auth/pages/profil.dart';
+import 'package:moodmate/features/auth/services/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -17,6 +17,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final _authService = AuthService();
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -25,6 +27,70 @@ class _RegisterPageState extends State<RegisterPage> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _handleRegister() async {
+    if (_nameController.text.isEmpty ||
+        _emailController.text.isEmpty ||
+        _passwordController.text.isEmpty) {
+      _showErrorDialog('Veuillez remplir tous les champs');
+      return;
+    }
+
+    if (_passwordController.text != _confirmPasswordController.text) {
+      _showErrorDialog('Les mots de passe ne correspondent pas');
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      final result = await _authService.register(
+        _nameController.text,
+        _passwordController.text,
+        _emailController.text,
+      );
+
+      setState(() => _isLoading = false);
+
+      if (result['success'] == true && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Inscription réussie ! Veuillez vous connecter.'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const LoginPage()),
+          (route) => false,
+        );
+      } else if (mounted) {
+        _showErrorDialog(result['message'] ?? 'Erreur lors de l\'inscription');
+      }
+    } catch (e) {
+      setState(() => _isLoading = false);
+      if (mounted) {
+        _showErrorDialog('Erreur: ${e.toString()}');
+      }
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Erreur'),
+            content: Text(message),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+    );
   }
 
   @override
@@ -38,17 +104,13 @@ class _RegisterPageState extends State<RegisterPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFFF9A9E),
-              Color(0xFFFAD0C4),
-            ],
+            colors: [Color(0xFFFF9A9E), Color(0xFFFAD0C4)],
           ),
         ),
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -61,10 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: LinearGradient(
-                            colors: [
-                              Color(0xFFFF6FD8),
-                              Color(0xFF3813C2),
-                            ],
+                            colors: [Color(0xFFFF6FD8), Color(0xFF3813C2)],
                           ),
                         ),
                         child: const Icon(
@@ -90,7 +149,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 24),
+                      horizontal: 20,
+                      vertical: 24,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(32),
@@ -153,33 +214,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         SizedBox(
                           height: 48,
                           child: ElevatedButton(
-                            onPressed: () {
-                              // hna normalement katdir vérification (password == confirm, etc.)
-                              // Daba ghir nوريك navigation + passage de données
-
-                              final name = _nameController.text.trim();
-                              final email = _emailController.text.trim();
-
-                              if (name.isEmpty || email.isEmpty) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                        "Merci de renseigner au moins le nom et l'email."),
-                                  ),
-                                );
-                                return;
-                              }
-
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => ProfilePage(
-                                    name: name,
-                                    email: email,
-                                  ),
-                                ),
-                              );
-                            },
+                            onPressed: _isLoading ? null : _handleRegister,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: primaryPurple,
                               elevation: 0,
@@ -187,13 +222,23 @@ class _RegisterPageState extends State<RegisterPage> {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                             ),
-                            child: const Text(
-                              "Sign up",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
+                            child:
+                                _isLoading
+                                    ? const SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                    : const Text(
+                                      "Sign up",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                      ),
+                                    ),
                           ),
                         ),
 
@@ -202,9 +247,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         // "or"
                         Row(
                           children: [
-                            Expanded(
-                              child: Divider(color: Colors.grey[300]),
-                            ),
+                            Expanded(child: Divider(color: Colors.grey[300])),
                             const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
@@ -215,9 +258,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: Divider(color: Colors.grey[300]),
-                            ),
+                            Expanded(child: Divider(color: Colors.grey[300])),
                           ],
                         ),
 
@@ -316,7 +357,6 @@ class _AuthTextField extends StatelessWidget {
     required this.controller,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
-    super.key,
   });
 
   @override
@@ -329,8 +369,10 @@ class _AuthTextField extends StatelessWidget {
         hintText: hintText,
         filled: true,
         fillColor: const Color(0xFFF4F5FB),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide.none,
