@@ -1,11 +1,14 @@
 package com.example.assistant_therapeutique.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,6 +18,8 @@ public class ChatMessage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
     private LocalDateTime createdAt;
 
@@ -24,6 +29,7 @@ public class ChatMessage {
 
     @ManyToOne
     @JoinColumn(name = "conversation_id", nullable = false)
+    @JsonBackReference
     private Conversation conversation;
 
     // Getters and Setters

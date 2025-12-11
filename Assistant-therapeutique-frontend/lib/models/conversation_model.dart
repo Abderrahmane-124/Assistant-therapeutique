@@ -1,14 +1,18 @@
+import 'message_model.dart';
+
 class Conversation {
   final int? id;
   final String titre;
   final int userId;
   final DateTime createdAt;
+  final List<Message>? messages;
 
   Conversation({
     this.id,
     required this.titre,
     required this.userId,
     required this.createdAt,
+    this.messages,
   });
 
   factory Conversation.fromJson(Map<String, dynamic> json) {
@@ -41,11 +45,28 @@ class Conversation {
       return DateTime.now();
     }
 
+    // Parse messages list
+    List<Message>? parseMessages(dynamic data) {
+      if (data == null || data['messages'] == null) return null;
+      if (data['messages'] is List) {
+        try {
+          return (data['messages'] as List)
+              .map((msg) => Message.fromJson(msg as Map<String, dynamic>))
+              .toList();
+        } catch (e) {
+          print('Error parsing messages: $e');
+          return null;
+        }
+      }
+      return null;
+    }
+
     return Conversation(
       id: (json['id'] is num) ? (json['id'] as num).toInt() : json['id'] as int?,
       titre: json['titre']?.toString() ?? json['title']?.toString() ?? 'Sans titre',
       userId: parseUserId(json),
       createdAt: parseCreatedAt(json),
+      messages: parseMessages(json),
     );
   }
 
@@ -64,12 +85,14 @@ class Conversation {
     String? titre,
     int? userId,
     DateTime? createdAt,
+    List<Message>? messages,
   }) {
     return Conversation(
       id: id ?? this.id,
       titre: titre ?? this.titre,
       userId: userId ?? this.userId,
       createdAt: createdAt ?? this.createdAt,
+      messages: messages ?? this.messages,
     );
   }
 }

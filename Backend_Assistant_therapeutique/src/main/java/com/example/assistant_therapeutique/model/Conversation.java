@@ -1,5 +1,6 @@
 package com.example.assistant_therapeutique.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List; // Import List
@@ -20,6 +21,7 @@ public class Conversation {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<ChatMessage> messages; // List of messages in this conversation
 
     // Constructors

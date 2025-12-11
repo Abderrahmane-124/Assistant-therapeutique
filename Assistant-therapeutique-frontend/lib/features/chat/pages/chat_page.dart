@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../services/chat_service.dart';
+import '../../../models/conversation_model.dart';
+import '../../../models/message_model.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -116,13 +118,39 @@ class _ChatPageState extends State<ChatPage>
       if (result['success'] == true) {
         // Update conversation ID if it's a new conversation
         if (_currentConversationId == null && result['conversation'] != null) {
-          _currentConversationId = result['conversation'].id;
+          Conversation conversation = result['conversation'];
+          _currentConversationId = conversation.id;
         }
 
-        // Get the last message from the conversation (AI response)
-        // You'll need to extract the AI response from the result
-        // This depends on your backend response structure
-        _addBotMessage('Réponse du serveur reçue'); // TODO: Extract actual AI response
+        // Extract messages from the conversation
+        if (result['conversation'] != null) {
+          Conversation conversation = result['conversation'];
+          
+          // Get the conversation with messages
+          try {
+            Conversation fullConversation = await _chatService.getConversation(_currentConversationId!);
+            
+            // Find the AI response (last message that's not from the user)
+            if (fullConversation.messages != null && fullConversation.messages!.isNotEmpty) {
+              // Get the last AI message (senderId == 1)
+              final aiMessages = fullConversation.messages!
+                  .where((msg) => msg.senderId == 1)
+                  .toList();
+              
+              if (aiMessages.isNotEmpty) {
+                final lastAiMessage = aiMessages.last;
+                _addBotMessage(lastAiMessage.content);
+              } else {
+                _addBotMessage('Réponse reçue mais aucun message AI trouvé.');
+              }
+            } else {
+              _addBotMessage('Réponse reçue mais aucun message disponible.');
+            }
+          } catch (e) {
+            debugPrint('Error fetching conversation: $e');
+            _addBotMessage('Réponse envoyée avec succès.');
+          }
+        }
       } else {
         _addBotMessage(
           'Désolé, une erreur s\'est produite: ${result['message'] ?? 'Erreur inconnue'}',

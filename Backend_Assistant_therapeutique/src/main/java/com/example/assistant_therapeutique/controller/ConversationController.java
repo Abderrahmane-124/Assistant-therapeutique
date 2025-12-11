@@ -5,6 +5,7 @@ import com.example.assistant_therapeutique.model.Conversation;
 import com.example.assistant_therapeutique.model.ChatMessage;
 import com.example.assistant_therapeutique.service.ConversationService;
 import com.example.assistant_therapeutique.service.ChatMessageService;
+import com.example.assistant_therapeutique.service.AiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class ConversationController {
     
     @Autowired
     private ChatMessageService chatMessageService;
+    
+    @Autowired
+    private AiService aiService;
 
     @PostMapping
     public ResponseEntity<Conversation> createConversation(@RequestBody ConversationRequestDTO conversationRequestDTO) {
@@ -73,9 +77,10 @@ public class ConversationController {
                 message
             );
             
-            // TODO: Generate AI response here
-            // For now, send a mock response
-            String aiResponseText = "Merci pour votre message. Je suis là pour vous aider.";
+            // Generate AI response using the fine-tuned model
+            String aiResponseText = aiService.getAiResponse(message);
+            
+            // Save AI response (using userId 1 as AI user)
             ChatMessage aiMessage = chatMessageService.saveMessage(
                 1L, // AI user ID
                 conversationId,
