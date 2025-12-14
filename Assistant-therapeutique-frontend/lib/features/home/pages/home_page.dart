@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage>
       context,
       PageRouteBuilder(
         pageBuilder:
-            (context, animation, secondaryAnimation) => const ProfilePage(),
+            (context, animation, secondaryAnimation) =>  ProfilePage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(0.0, 1.0);
           const end = Offset.zero;
