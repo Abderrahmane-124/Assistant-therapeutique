@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final primaryPurple = const Color(0xFF5B3CF5);
+    final primaryButtonColor = const Color(0xFF667EEA);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -186,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: ElevatedButton(
                             onPressed: _isLoading ? null : _handleLogin,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryPurple,
+                              backgroundColor: primaryButtonColor,
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),

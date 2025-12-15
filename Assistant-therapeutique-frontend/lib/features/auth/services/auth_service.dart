@@ -89,6 +89,86 @@ class AuthService {
     }
   }
 
+    Future<Map<String, dynamic>> getProfile() async {
+    final int? userId = await getUserId();
+    if (userId == null) {
+      return {'success': false, 'message': 'Utilisateur non connecté'};
+    }
+
+    final Uri url = Uri.parse('$_baseUrl/api/users/$userId');
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        return {'success': true, 'data': jsonDecode(response.body)};
+      } else {
+        return {
+          'success': false,
+          'message': 'Erreur lors de la récupération du profil'
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'Impossible de se connecter au serveur.'
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> updateUserProfile(
+      int userId, Map<String, dynamic> data) async {
+    final Uri url = Uri.parse('$_baseUrl/api/users/$userId');
+    try {
+      final response = await http.put(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        return {'success': true, 'data': jsonDecode(response.body)};
+      } else {
+        return {
+          'success': false,
+          'message': 'Erreur lors de la mise à jour du profil'
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'Impossible de se connecter au serveur.'
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> getStats() async {
+    final int? userId = await getUserId();
+    if (userId == null) {
+      return {'success': false, 'message': 'Utilisateur non connecté'};
+    }
+
+    final Uri url = Uri.parse('$_baseUrl/api/users/$userId/stats');
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        return {'success': true, 'data': jsonDecode(response.body)};
+      } else {
+        return {
+          'success': false,
+          'message': 'Erreur lors de la récupération des statistiques'
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'Impossible de se connecter au serveur.'
+      };
+    }
+  }
+
   // --- Utility methods for userId storage ---
   static Future<void> _saveUserId(int userId) async {
     final prefs = await SharedPreferences.getInstance();
