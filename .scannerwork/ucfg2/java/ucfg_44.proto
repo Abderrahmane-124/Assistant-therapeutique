@@ -1,0 +1,15 @@
+
+qcom.example.assistant_therapeutique.model.ChatMessage#getSender()Lcom/example/assistant_therapeutique/model/User;º
+¯C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/model/ChatMessage.java< <("1*€
+1= =(¬
+©
+= =(4
+%0.com.example.assistant_therapeutique.model.User"__id*a
+
+__unknown_file (E*C7
+5com.example.assistant_therapeutique.model.ChatMessage"
+sender"B
+= =(6
+4
+%0.com.example.assistant_therapeutique.model.UserB97
+5com.example.assistant_therapeutique.model.ChatMessageH

@@ -1,0 +1,16 @@
+
+[com.example.assistant_therapeutique.dto.ChatMessageRequestDTO#getSenderId()Ljava/lang/Long;Â
+·C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/dto/ChatMessageRequestDTO.java ("1*Ê
+1 (–
+“
+ (
+%0java.lang.Long"__id*k
+
+__unknown_file (O*M?
+=com.example.assistant_therapeutique.dto.ChatMessageRequestDTO"
+
+senderId""
+ (
+
+%0java.lang.LongBA?
+=com.example.assistant_therapeutique.dto.ChatMessageRequestDTOH

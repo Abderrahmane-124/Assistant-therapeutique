@@ -1,0 +1,15 @@
+
+]com.example.assistant_therapeutique.model.ChatMessage#getCreatedAt()Ljava/time/LocalDateTime;º
+¯C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/model/ChatMessage.java4 4(%"1*Õ
+15 5(˜
+•
+5 5(
+%0java.time.LocalDateTime"__id*d
+
+__unknown_file (H*F7
+5com.example.assistant_therapeutique.model.ChatMessage"
+	createdAt"+
+5 5(
+
+%0java.time.LocalDateTimeB97
+5com.example.assistant_therapeutique.model.ChatMessageH

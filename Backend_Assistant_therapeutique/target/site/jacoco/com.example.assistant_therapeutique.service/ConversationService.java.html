@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConversationService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assistant-therapeutique</a> &gt; <a href="index.source.html" class="el_package">com.example.assistant_therapeutique.service</a> &gt; <span class="el_source">ConversationService.java</span></div><h1>ConversationService.java</h1><pre class="source lang-java linenums">package com.example.assistant_therapeutique.service;
+
+import com.example.assistant_therapeutique.model.Conversation;
+import com.example.assistant_therapeutique.model.User;
+import com.example.assistant_therapeutique.repository.ConversationRepository;
+import com.example.assistant_therapeutique.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L15">public class ConversationService {</span>
+
+    @Autowired
+    private ConversationRepository conversationRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public List&lt;Conversation&gt; getConversationsByUserId(Long userId) {
+<span class="fc" id="L24">        return conversationRepository.findByUserId(userId);</span>
+    }
+
+    public Optional&lt;Conversation&gt; getConversationById(Long id) {
+<span class="fc" id="L28">        return conversationRepository.findById(id);</span>
+    }
+
+    public Conversation createConversation(Long userId, String titre) {
+<span class="fc" id="L32">        Optional&lt;User&gt; userOptional = userRepository.findById(userId);</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (userOptional.isEmpty()) {</span>
+<span class="fc" id="L34">            throw new RuntimeException(&quot;User not found with ID: &quot; + userId);</span>
+        }
+<span class="fc" id="L36">        User user = userOptional.get();</span>
+
+<span class="fc" id="L38">        Conversation conversation = new Conversation();</span>
+<span class="fc" id="L39">        conversation.setTitre(titre);</span>
+<span class="fc" id="L40">        conversation.setUser(user);</span>
+<span class="fc" id="L41">        conversation.setCreatedAt(LocalDateTime.now());</span>
+
+<span class="fc" id="L43">        return conversationRepository.save(conversation);</span>
+    }
+    
+    public Conversation saveConversation(Conversation conversation) {
+<span class="nc" id="L47">        return conversationRepository.save(conversation);</span>
+    }
+
+    public void deleteConversation(Long id) {
+<span class="fc" id="L51">        conversationRepository.deleteById(id);</span>
+<span class="fc" id="L52">    }</span>
+    
+    public Conversation updateTitle(Long id, String newTitle) {
+<span class="fc" id="L55">        Conversation conversation = conversationRepository.findById(id)</span>
+<span class="fc" id="L56">            .orElseThrow(() -&gt; new RuntimeException(&quot;Conversation not found with ID: &quot; + id));</span>
+<span class="fc" id="L57">        conversation.setTitre(newTitle);</span>
+<span class="fc" id="L58">        return conversationRepository.save(conversation);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assistant-therapeutique</a> &gt; <a href="index.source.html" class="el_package">com.example.assistant_therapeutique.controller</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.example.assistant_therapeutique.controller;
+
+import com.example.assistant_therapeutique.model.User;
+import com.example.assistant_therapeutique.service.UserService;
+import com.example.assistant_therapeutique.repository.ConversationRepository;
+import com.example.assistant_therapeutique.repository.JournalRepository;
+import com.example.assistant_therapeutique.repository.MoodRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(&quot;/api/users&quot;)
+<span class="fc" id="L19">public class UserController {</span>
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ConversationRepository conversationRepository;
+
+    @Autowired
+    private JournalRepository journalRepository;
+
+    @Autowired
+    private MoodRepository moodRepository;
+
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;?&gt; getUserById(@PathVariable Long id) {
+<span class="fc" id="L35">        Optional&lt;User&gt; user = userService.findById(id);</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (user.isPresent()) {</span>
+            // Return user without password for security
+<span class="fc" id="L38">            User foundUser = user.get();</span>
+<span class="fc" id="L39">            Map&lt;String, Object&gt; response = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L40">            response.put(&quot;id&quot;, foundUser.getId());</span>
+<span class="fc" id="L41">            response.put(&quot;username&quot;, foundUser.getUsername());</span>
+<span class="fc" id="L42">            return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+        } else {
+<span class="fc" id="L44">            Map&lt;String, String&gt; error = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L45">            error.put(&quot;message&quot;, &quot;User not found&quot;);</span>
+<span class="fc" id="L46">            return new ResponseEntity&lt;&gt;(error, HttpStatus.NOT_FOUND);</span>
+        }
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;?&gt; updateUser(@PathVariable Long id, @RequestBody Map&lt;String, String&gt; updates) {
+<span class="fc" id="L52">        Optional&lt;User&gt; existingUser = userService.findById(id);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (existingUser.isPresent()) {</span>
+<span class="fc" id="L54">            User user = existingUser.get();</span>
+            
+            // Update username if provided
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">            if (updates.containsKey(&quot;username&quot;)) {</span>
+<span class="fc" id="L58">                user.setUsername(updates.get(&quot;username&quot;));</span>
+            }
+            
+            // Update password if provided
+<span class="pc bpc" id="L62" title="3 of 4 branches missed.">            if (updates.containsKey(&quot;password&quot;) &amp;&amp; !updates.get(&quot;password&quot;).isEmpty()) {</span>
+<span class="nc" id="L63">                user.setPassword(updates.get(&quot;password&quot;));</span>
+            }
+            
+<span class="fc" id="L66">            User savedUser = userService.saveUser(user);</span>
+<span class="fc" id="L67">            Map&lt;String, Object&gt; response = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L68">            response.put(&quot;id&quot;, savedUser.getId());</span>
+<span class="fc" id="L69">            response.put(&quot;username&quot;, savedUser.getUsername());</span>
+<span class="fc" id="L70">            return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+        } else {
+<span class="fc" id="L72">            Map&lt;String, String&gt; error = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L73">            error.put(&quot;message&quot;, &quot;User not found&quot;);</span>
+<span class="fc" id="L74">            return new ResponseEntity&lt;&gt;(error, HttpStatus.NOT_FOUND);</span>
+        }
+    }
+
+    @GetMapping(&quot;/{id}/stats&quot;)
+    public ResponseEntity&lt;?&gt; getUserStats(@PathVariable Long id) {
+<span class="fc" id="L80">        Optional&lt;User&gt; user = userService.findById(id);</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (user.isPresent()) {</span>
+            // Calculate real statistics from database
+<span class="fc" id="L83">            int conversationsCount = conversationRepository.findByUserId(id).size();</span>
+<span class="fc" id="L84">            int journalEntriesCount = journalRepository.findByUserId(id).size();</span>
+<span class="fc" id="L85">            int moodEntriesCount = moodRepository.findByUserId(id).size();</span>
+
+<span class="fc" id="L87">            Map&lt;String, Object&gt; stats = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L88">            stats.put(&quot;userId&quot;, id);</span>
+<span class="fc" id="L89">            stats.put(&quot;conversationsCount&quot;, conversationsCount);</span>
+<span class="fc" id="L90">            stats.put(&quot;journalEntriesCount&quot;, journalEntriesCount);</span>
+<span class="fc" id="L91">            stats.put(&quot;moodEntriesCount&quot;, moodEntriesCount);</span>
+<span class="fc" id="L92">            return new ResponseEntity&lt;&gt;(stats, HttpStatus.OK);</span>
+        } else {
+<span class="fc" id="L94">            Map&lt;String, String&gt; error = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L95">            error.put(&quot;message&quot;, &quot;User not found&quot;);</span>
+<span class="fc" id="L96">            return new ResponseEntity&lt;&gt;(error, HttpStatus.NOT_FOUND);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

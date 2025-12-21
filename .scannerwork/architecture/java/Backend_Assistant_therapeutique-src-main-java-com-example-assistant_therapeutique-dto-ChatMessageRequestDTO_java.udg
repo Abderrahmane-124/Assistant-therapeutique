@@ -1,0 +1,378 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137838577*java2.B—
+u
+pBackend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/dto/ChatMessageRequestDTO.java2
+	
+type3
+	
+MAIN4
+
+package6
+,
+'com.example.assistant_therapeutique.dto7
+B
+=com.example.assistant_therapeutique.dto.ChatMessageRequestDTO9
+
+class10
+
+access11
+
+public12
+
+
+full-range13
+
+(3:1)-(42:2)14
+
+simple-name15
+
+ChatMessageRequestDTO16
+L
+Fcom.example.assistant_therapeutique.dto.ChatMessageRequestDTO.senderId18
+
+field19
+
+private20
+
+(4:5)-(4:27)21
+
+senderId22
+R
+Lcom.example.assistant_therapeutique.dto.ChatMessageRequestDTO.conversationId24
+
+(5:5)-(5:33)25
+
+conversationId26
+K
+Ecom.example.assistant_therapeutique.dto.ChatMessageRequestDTO.content28
+
+(6:5)-(6:28)29
+
+content30
+M
+Gcom.example.assistant_therapeutique.dto.ChatMessageRequestDTO#<init>()V32
+
+method33
+
+(9:5)-(10:6)34
+
+calls35
+
+ycom.example.assistant_therapeutique.dto.ChatMessageRequestDTO#<init>(Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/String;)V37
+
+(12:5)-(16:6)38
+
+
+uses39
+
+
+references40
+a
+[com.example.assistant_therapeutique.dto.ChatMessageRequestDTO#getSenderId()Ljava/lang/Long;42
+
+(19:5)-(21:6)43
+
+getSenderId44
+b
+\com.example.assistant_therapeutique.dto.ChatMessageRequestDTO#setSenderId(Ljava/lang/Long;)V46
+
+(23:5)-(25:6)47
+
+setSenderId48
+g
+acom.example.assistant_therapeutique.dto.ChatMessageRequestDTO#getConversationId()Ljava/lang/Long;50
+
+(27:5)-(29:6)51
+
+getConversationId52
+h
+bcom.example.assistant_therapeutique.dto.ChatMessageRequestDTO#setConversationId(Ljava/lang/Long;)V54
+
+(31:5)-(33:6)55
+
+setConversationId56
+b
+\com.example.assistant_therapeutique.dto.ChatMessageRequestDTO#getContent()Ljava/lang/String;58
+
+(35:5)-(37:6)59
+
+
+getContent60
+c
+]com.example.assistant_therapeutique.dto.ChatMessageRequestDTO#setContent(Ljava/lang/String;)V62
+
+(39:5)-(41:6)63
+
+
+setContent64J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576j®
+M
+17G
+171819 *
+1 (28:5B$
+
+
+11
+20
+
+
+13
+21
+
+
+15
+22
+M
+23G
+232419 *
+1 ( 28:5B$
+
+
+11
+20
+
+
+13
+25
+
+
+15
+26
+G
+8B
+8910 *
+1 (#:5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+M
+53G
+535433 *
+1 ("28:5B$
+
+
+11
+12
+
+
+13
+55
+
+
+15
+56
+M
+61G
+616233 *
+1' '(28:5B$
+
+
+11
+12
+
+
+13
+63
+
+
+15
+64
+M
+41G
+414233 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+43
+
+
+15
+44
+M
+57G
+575833 *
+1# #(28:5B$
+
+
+11
+12
+
+
+13
+59
+
+
+15
+60
+M
+31G
+313233 *
+1	 	(!28:5B$
+
+
+11
+12
+
+
+13
+34
+
+
+15
+16
+M
+45G
+454633 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+47
+
+
+15
+48
+M
+27G
+272819 *
+1 (28:5B$
+
+
+11
+20
+
+
+13
+29
+
+
+15
+30
+M
+36G
+363733 *
+1 (!28:5B$
+
+
+11
+12
+
+
+13
+38
+
+
+15
+16
+M
+49G
+495033 *
+1 ("28:5B$
+
+
+11
+12
+
+
+13
+51
+
+
+15
+52rß
+
+31835*
+1	 	(!
+
+36835*
+1 (!
+
+36839*
+1	 (
+
+36840*
+1	 (
+
+361740*
+1 (
+
+36839*
+1	 (
+
+36840*
+1	 (
+
+362340*
+1 (
+
+36839*
+1	 (
+
+36840*
+1	 (
+
+362740*
+1 (
+
+411740*
+1 (
+
+45839*
+1	 (
+
+45840*
+1	 (
+
+451740*
+1 (
+
+492340*
+1 (
+
+53839*
+1 	  (
+
+53840*
+1 	  (
+
+532340*
+1   (
+
+572740*
+1$ $(
+
+61839*
+1(	 ((
+
+61840*
+1(	 ((
+
+612740*
+1( ((

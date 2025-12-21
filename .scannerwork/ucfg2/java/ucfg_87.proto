@@ -1,0 +1,63 @@
+
+vcom.example.assistant_therapeutique.controller.JournalController#getJournalsByUserId(Ljava/lang/Long;)Ljava/util/List;Å
+ºC:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/controller/JournalController.java (,"startingBlock*ª
+startingBlock, (Gƒ
+€
+ (!
+%2"
+__annotate**
+
+__unknown_file (
+
+GetMapping*6
+
+__unknown_file (
+
+userIdjava.lang.Long…
+‚
+- (:
+%3"
+__annotate*,
+
+__unknown_file (
+PathVariable*6
+
+__unknown_file (
+
+userIdjava.lang.Long|
+z
+@ (F
+userIdjava.lang.Long"__annotation*"
+
+__unknown_file (
+
+%2*"
+
+__unknown_file (
+
+%3*
+1*Ö
+1 (Ë
+È
+ (@
+%0:com.example.assistant_therapeutique.service.JournalService"__id*t
+
+__unknown_file (X*VB
+@com.example.assistant_therapeutique.controller.JournalController"
+journalServiceÔÑ
+ (9
+%1java.util.List"pcom.example.assistant_therapeutique.service.JournalService#getJournalsByUserId(Ljava/lang/Long;)Ljava/util/List;*^
+
+__unknown_file (B
+@
+%0:com.example.assistant_therapeutique.service.JournalService*6
+
+__unknown_file (
+
+userIdjava.lang.Long2%getJournalsByUserId(Ljava/lang/Long;)""
+ (:
+
+%1java.util.List:$
+- (F
+userIdjava.lang.LongBDB
+@com.example.assistant_therapeutique.controller.JournalControllerH

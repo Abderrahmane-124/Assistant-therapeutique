@@ -1,0 +1,190 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137840386*java2.Bæ
+|
+wBackend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/controller/CustomErrorController.java2
+	
+type3
+	
+MAIN4
+
+package6
+3
+.com.example.assistant_therapeutique.controller7
+I
+Dcom.example.assistant_therapeutique.controller.CustomErrorController9
+
+class10
+
+access11
+
+public12
+
+
+full-range13
+
+(8:1)-(21:2)14
+
+simple-name15
+
+CustomErrorController16
+-
+'Recovered#typeBindingLErrorController;018
+
+unknown19
+
+
+implements20
+
+RestController22
+
+annotated by23
+,
+&Recovered#typeBindingLRestController;025
+
+
+uses26
+O
+Icom.example.assistant_therapeutique.controller.CustomErrorController.PATH28
+
+field29
+
+private30
+
+(11:5)-(11:49)31
+
+
+PATH32
+d
+^com.example.assistant_therapeutique.controller.CustomErrorController#error()Ljava/lang/String;34
+
+method35
+
+(13:5)-(16:6)36
+
+error37
+
+RequestMapping39
+,
+&Recovered#typeBindingLRequestMapping;041
+
+
+references42
+k
+ecom.example.assistant_therapeutique.controller.CustomErrorController#getErrorPath()Ljava/lang/String;44
+
+(18:5)-(20:6)45
+
+getErrorPath46J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576jš
+G
+8B
+8910 *
+1	 	(#:5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+M
+27G
+272829 *
+1! (%28:5B$
+
+
+11
+30
+
+
+13
+31
+
+
+15
+32
+M
+33G
+333435 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+36
+
+
+15
+37
+
+17
+171819
+
+24
+242519
+
+40
+404119
+
+21
+212219
+M
+43G
+434435 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+45
+
+
+15
+46
+
+38
+383919rÔ
+
+81720*
+1	/ 	(>
+
+82123*
+1 (
+
+82426*
+1 (
+
+81726*
+1	/ 	(>
+
+333823*
+1 ("
+
+334026*
+1 (
+
+332742*
+1 (!
+
+432742*
+1 (

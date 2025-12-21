@@ -1,0 +1,63 @@
+
+€com.example.assistant_therapeutique.controller.ConversationController#getConversationsByUserId(Ljava/lang/Long;)Ljava/util/List;Ê
+¿C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/controller/ConversationController.java) )(6"startingBlock*ª
+startingBlock)6 )(Qƒ
+€
+( ((!
+%2"
+__annotate**
+
+__unknown_file (
+
+GetMapping*6
+
+__unknown_file (
+
+userIdjava.lang.Long…
+‚
+)7 )(D
+%3"
+__annotate*,
+
+__unknown_file (
+PathVariable*6
+
+__unknown_file (
+
+userIdjava.lang.Long|
+z
+)J )(P
+userIdjava.lang.Long"__annotation*"
+
+__unknown_file (
+
+%2*"
+
+__unknown_file (
+
+%3*
+1*ù
+1* *("Ú
+×
+* *("E
+%0?com.example.assistant_therapeutique.service.ConversationService"__id*~
+
+__unknown_file (b*`G
+Ecom.example.assistant_therapeutique.controller.ConversationController"
+conversationServiceèå
+* *(C
+%1java.util.List"zcom.example.assistant_therapeutique.service.ConversationService#getConversationsByUserId(Ljava/lang/Long;)Ljava/util/List;*c
+
+__unknown_file (G
+E
+%0?com.example.assistant_therapeutique.service.ConversationService*6
+
+__unknown_file (
+
+userIdjava.lang.Long2*getConversationsByUserId(Ljava/lang/Long;)""
+* *(D
+
+%1java.util.List:$
+)7 )(P
+userIdjava.lang.LongBIG
+Ecom.example.assistant_therapeutique.controller.ConversationControllerH

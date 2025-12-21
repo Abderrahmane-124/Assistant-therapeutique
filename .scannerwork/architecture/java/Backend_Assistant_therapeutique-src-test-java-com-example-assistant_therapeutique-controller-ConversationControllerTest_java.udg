@@ -1,0 +1,900 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137840665*java2.B†
+Å
+|Backend_Assistant_therapeutique/src/test/java/com/example/assistant_therapeutique/controller/ConversationControllerTest.java2
+	
+type3
+	
+TEST4
+
+package6
+3
+.com.example.assistant_therapeutique.controller7
+N
+Icom.example.assistant_therapeutique.controller.ConversationControllerTest9
+
+class10
+
+access11
+
+	protected12
+
+
+full-range13
+
+(34:1)-(139:2)14
+
+simple-name15
+ 
+ConversationControllerTest16
+
+
+WebMvcTest18
+
+unknown19
+
+annotated by20
+(
+"Recovered#typeBindingLWebMvcTest;022
+
+
+uses23
+4
+.Recovered#typeBindingLConversationController;025
+W
+Qcom.example.assistant_therapeutique.controller.ConversationControllerTest.mockMvc27
+
+field28
+
+private29
+
+(37:5)-(38:29)30
+
+mockMvc31
+
+MockMvc33
+
+is type34
+
+	Autowired36
+'
+!Recovered#typeBindingLAutowired;038
+c
+]com.example.assistant_therapeutique.controller.ConversationControllerTest.conversationService40
+
+(40:5)-(41:53)41
+
+conversationService42
+
+ConversationService44
+
+MockBean46
+&
+ Recovered#typeBindingLMockBean;048
+b
+\com.example.assistant_therapeutique.controller.ConversationControllerTest.chatMessageService50
+
+(43:5)-(44:51)51
+
+chatMessageService52
+
+ChatMessageService54
+Y
+Scom.example.assistant_therapeutique.controller.ConversationControllerTest.aiService56
+
+(46:5)-(47:33)57
+
+	aiService58
+
+	AiService60
+\
+Vcom.example.assistant_therapeutique.controller.ConversationControllerTest.objectMapper62
+
+(49:5)-(50:39)63
+
+objectMapper64
+
+ObjectMapper66
+X
+Rcom.example.assistant_therapeutique.controller.ConversationControllerTest.testUser68
+
+(52:5)-(52:27)69
+
+testUser70
+
+
+User72
+`
+Zcom.example.assistant_therapeutique.controller.ConversationControllerTest.testConversation74
+
+(53:5)-(53:43)75
+
+testConversation76
+
+Conversation78
+X
+Rcom.example.assistant_therapeutique.controller.ConversationControllerTest#setUp()V80
+
+method81
+
+(55:5)-(65:6)82
+
+setUp83
+
+
+BeforeEach85
+(
+"Recovered#typeBindingLBeforeEach;087
+
+
+references88
+y
+scom.example.assistant_therapeutique.controller.ConversationControllerTest#createConversation_ShouldReturnCreated()V90
+
+(67:5)-(80:6)91
+,
+&createConversation_ShouldReturnCreated92
+
+
+Test94
+"
+Recovered#typeBindingLTest;096
+
+DisplayName98
+*
+#Recovered#typeBindingLDisplayName;0100
+5
+.Recovered#typeBindingLConversationRequestDTO;0102
+Ü
+com.example.assistant_therapeutique.controller.ConversationControllerTest#getConversationsByUserId_ShouldReturnConversations()V104
+
+(82:5)-(90:6)105
+9
+2getConversationsByUserId_ShouldReturnConversations106
+
+xcom.example.assistant_therapeutique.controller.ConversationControllerTest#getConversationById_WhenExists_ShouldReturn()V108
+
+(92:5)-(100:6)109
+2
++getConversationById_WhenExists_ShouldReturn110
+Ö
+~com.example.assistant_therapeutique.controller.ConversationControllerTest#getConversationById_WhenNotExists_ShouldReturn404()V112
+
+(102:5)-(109:6)113
+8
+1getConversationById_WhenNotExists_ShouldReturn404114
+u
+ncom.example.assistant_therapeutique.controller.ConversationControllerTest#deleteConversation_ShouldReturnOk()V116
+
+(111:5)-(119:6)117
+(
+!deleteConversation_ShouldReturnOk118
+x
+qcom.example.assistant_therapeutique.controller.ConversationControllerTest#updateConversationTitle_ShouldUpdate()V120
+
+(121:5)-(138:6)121
++
+$updateConversationTitle_ShouldUpdate122
++
+$Recovered#typeBindingLConversation;0124J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576jÛ
+M
+73G
+737428 *
+15 5(*28:5B$
+
+
+11
+29
+
+
+13
+75
+
+
+15
+76
+
+101
+10110219
+
+21
+212219
+
+71
+717219
+
+99
+9910019
+G
+8B
+8910 *
+1# #(!:5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+
+53
+535419
+
+24
+242519
+M
+61G
+616228 *
+12 2(&28:5B$
+
+
+11
+29
+
+
+13
+63
+
+
+15
+64
+
+77
+777819
+R
+119K
+11912081 *
+1{
+ {(.28:5B&
+
+
+11
+12
+
+13
+121
+
+15
+122
+R
+111K
+11111281 *
+1h
+ h(;28:5B&
+
+
+11
+12
+
+13
+113
+
+15
+114
+
+35
+353619
+R
+107K
+10710881 *
+1^
+ ^(528:5B&
+
+
+11
+12
+
+13
+109
+
+15
+110
+M
+55G
+555628 *
+1/ /( 28:5B$
+
+
+11
+29
+
+
+13
+57
+
+
+15
+58
+
+93
+939419
+
+97
+979819
+
+47
+474819
+
+32
+323319
+
+65
+656619
+M
+89G
+899081 *
+1E
+ E(028:5B$
+
+
+11
+12
+
+
+13
+91
+
+
+15
+92
+M
+26G
+262728 *
+1& &(28:5B$
+
+
+11
+29
+
+
+13
+30
+
+
+15
+31
+M
+39G
+394028 *
+1)! )(428:5B$
+
+
+11
+29
+
+
+13
+41
+
+
+15
+42
+
+17
+171819
+M
+79G
+798081 *
+18
+ 8(28:5B$
+
+
+11
+12
+
+
+13
+82
+
+
+15
+83
+R
+115K
+11511681 *
+1q
+ q(+28:5B&
+
+
+11
+12
+
+13
+117
+
+15
+118
+
+123
+12312419
+
+43
+434419
+M
+67G
+676828 *
+14 4(28:5B$
+
+
+11
+29
+
+
+13
+69
+
+
+15
+70
+
+86
+868719
+M
+49G
+495028 *
+1,  ,(228:5B$
+
+
+11
+29
+
+
+13
+51
+
+
+15
+52
+
+84
+848519
+
+37
+373819
+R
+103K
+10310481 *
+1T
+ T(<28:5B&
+
+
+11
+12
+
+13
+105
+
+15
+106
+
+95
+959619
+
+59
+596019
+
+45
+454619rπ
+
+81720*
+1" "(*
+
+82123*
+1" "(
+
+82423*
+1" "(#
+
+263234*
+1& &(
+
+263520*
+1% %(
+
+263723*
+1% %(
+
+263223*
+1& &(
+
+263223*
+1& &(
+
+394334*
+1) )( 
+
+394520*
+1( ((
+
+394723*
+1( ((
+
+394323*
+1) )( 
+
+394323*
+1)! )(4
+
+495334*
+1, ,(
+
+494520*
+1+ +(
+
+494723*
+1+ +(
+
+495323*
+1, ,(
+
+495323*
+1,  ,(2
+
+555934*
+1/ /(
+
+554520*
+1. .(
+
+554723*
+1. .(
+
+555923*
+1/ /(
+
+555923*
+1/ /( 
+
+616534*
+12 2(
+
+613520*
+11 1(
+
+613723*
+11 1(
+
+616523*
+12 2(
+
+616523*
+12 2(&
+
+677134*
+14 4(
+
+677123*
+14 4(
+
+677123*
+14 4(
+
+737734*
+15 5(
+
+737723*
+15 5(
+
+737723*
+15 5(*
+
+798420*
+17 7(
+
+798623*
+17 7(
+
+797123*
+19	 9(
+
+796788*
+19	 9(
+
+796788*
+1:	 :(
+
+797123*
+1:	 :(
+
+796788*
+1:	 :(
+
+797723*
+1<	 <(
+
+797388*
+1<	 <(
+
+797388*
+1=	 =(
+
+797723*
+1=	 =(
+
+797388*
+1=	 =(
+
+797388*
+1>	 >(
+
+797723*
+1>	 >(
+
+797388*
+1>	 >(
+
+797388*
+1?	 ?(
+
+797723*
+1?	 ?(
+
+797388*
+1?	 ?(
+
+797123*
+1?" ?(*
+
+796788*
+1?" ?(*
+
+797388*
+1@	 @(
+
+797723*
+1@	 @(
+
+797388*
+1@	 @(
+
+899320*
+1C C(
+
+
+899523*
+1C C(
+
+
+899720*
+1D D(F
+
+899923*
+1D D(
+
+8910134*
+1F  F(#
+
+8910123*
+1F	 F(
+
+893988*
+1J J(!
+
+894323*
+1J J(!
+
+893988*
+1J J(!
+
+897723*
+1JV J(f
+
+897388*
+1JV J(f
+
+892688*
+1L	 L(
+
+893223*
+1L	 L(
+
+892688*
+1L	 L(
+
+896188*
+1N" N(.
+
+896523*
+1N" N(.
+
+896188*
+1N" N(.
+
+1039320*
+1R R(
+
+
+1039523*
+1R R(
+
+
+1039720*
+1S S(X
+
+1039923*
+1S S(
+
+1033988*
+1U U(!
+
+1034323*
+1U U(!
+
+1033988*
+1U U(!
+
+1037723*
+1UY U(i
+
+1037388*
+1UY U(i
+
+1032688*
+1W	 W(
+
+1033223*
+1W	 W(
+
+1032688*
+1W	 W(
+
+1079320*
+1\ \(
+
+
+1079523*
+1\ \(
+
+
+1079720*
+1] ](>
+
+1079923*
+1] ](
+
+1073988*
+1_ _(!
+
+1074323*
+1_ _(!
+
+1073988*
+1_ _(!
+
+1077723*
+1_R _(b
+
+1077388*
+1_R _(b
+
+1072688*
+1a	 a(
+
+1073223*
+1a	 a(
+
+1072688*
+1a	 a(
+
+1119320*
+1f f(
+
+
+1119523*
+1f f(
+
+
+1119720*
+1g g(@
+
+1119923*
+1g g(
+
+1113988*
+1i i(!
+
+1114323*
+1i i(!
+
+1113988*
+1i i(!
+
+1112688*
+1k	 k(
+
+1113223*
+1k	 k(
+
+1112688*
+1k	 k(
+
+1159320*
+1o o(
+
+
+1159523*
+1o o(
+
+
+1159720*
+1p p(@
+
+1159923*
+1p p(
+
+1154323*
+1r r(-
+
+1153988*
+1r r(-
+
+1152688*
+1t	 t(
+
+1153223*
+1t	 t(
+
+1152688*
+1t	 t(
+
+1199320*
+1y y(
+
+
+1199523*
+1y y(
+
+
+1199720*
+1z z(F
+
+1199923*
+1z z(
+
+11912334*
+1| |(
+
+11912323*
+1|	 |(
+
+1193988*
+1Ä Ä(!
+
+1194323*
+1Ä Ä(!
+
+1193988*
+1Ä Ä(!
+
+1192688*
+1Ö	 Ö(
+
+1193223*
+1Ö	 Ö(
+
+1192688*
+1Ö	 Ö(
+
+1196188*
+1á" á(.
+
+1196523*
+1á" á(.
+
+1196188*
+1á" á(.

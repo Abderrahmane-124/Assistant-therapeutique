@@ -1,0 +1,16 @@
+
+ocom.example.assistant_therapeutique.service.JournalService#getJournalById(Ljava/lang/Long;)Ljava/util/Optional;¿
+´C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/service/JournalService.java (+"1*ò
+1 ( Î
+Ë
+ ( F
+%0@com.example.assistant_therapeutique.repository.JournalRepository"__id*q
+
+__unknown_file (U*S<
+:com.example.assistant_therapeutique.service.JournalService"
+journalRepository"
+ (.
+"": 
+, (3
+idjava.lang.LongB><
+:com.example.assistant_therapeutique.service.JournalServiceH

@@ -1,0 +1,270 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137838013*java2.B÷	
+m
+hBackend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/service/AiService.java2
+	
+type3
+	
+MAIN4
+
+package6
+0
++com.example.assistant_therapeutique.service7
+:
+5com.example.assistant_therapeutique.service.AiService9
+
+class10
+
+access11
+
+public12
+
+
+full-range13
+
+(14:1)-(73:2)14
+
+simple-name15
+
+	AiService16
+
+Service18
+
+unknown19
+
+annotated by20
+%
+Recovered#typeBindingLService;022
+
+
+uses23
+H
+Bcom.example.assistant_therapeutique.service.AiService.aiServiceUrl25
+
+field26
+
+private27
+
+(17:5)-(18:33)28
+
+aiServiceUrl29
+
+Value31
+#
+Recovered#typeBindingLValue;033
+H
+Bcom.example.assistant_therapeutique.service.AiService.restTemplate35
+
+(20:5)-(20:66)36
+
+restTemplate37
+
+RestTemplate39
+
+is type40
+o
+icom.example.assistant_therapeutique.service.AiService#getAiResponse(Ljava/lang/String;)Ljava/lang/String;42
+
+method43
+
+(27:5)-(56:6)44
+
+getAiResponse45
+)
+#Recovered#typeBindingLHttpHeaders;047
+(
+"Recovered#typeBindingLHttpEntity;049
+,
+&Recovered#typeBindingLResponseEntity;051
+
+
+references52
+S
+Mcom.example.assistant_therapeutique.service.AiService#isAiServiceAvailable()Z54
+
+(62:5)-(72:6)55
+
+isAiServiceAvailable56J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576j¥
+M
+53G
+535443 *
+1> >((28:5B$
+
+
+11
+12
+
+
+13
+55
+
+
+15
+56
+
+50
+505119
+
+21
+212219
+
+32
+323319
+
+17
+171819
+M
+24G
+242526 *
+1 ( 28:5B$
+
+
+11
+27
+
+
+13
+28
+
+
+15
+29
+
+48
+484919
+G
+8B
+8910 *
+1 (:5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+
+30
+303119
+
+38
+383919
+M
+34G
+343526 *
+1  (,28:5B$
+
+
+11
+27
+
+
+13
+36
+
+
+15
+37
+M
+41G
+414243 *
+1 ( 28:5B$
+
+
+11
+12
+
+
+13
+44
+
+
+15
+45
+
+46
+464719rë
+
+81720*
+1 (	
+
+82123*
+1 (	
+
+243020*
+1 (6
+
+243223*
+1 (
+
+343840*
+1 (
+
+343823*
+1 (
+
+343823*
+1  (,
+
+414640*
+1 ( 
+
+414623*
+1 (
+
+414840*
+1%- %(4
+
+414823*
+1% %(
+
+415040*
+1'! '()
+
+415023*
+1' '(
+
+413452*
+1', '(8
+
+413823*
+1', '(8
+
+413452*
+1', '(8
+
+412452*
+1( ((
+
+535040*
+1@! @()
+
+535023*
+1@ @(
+
+533452*
+1@, @(8
+
+533823*
+1@, @(8
+
+533452*
+1@, @(8
+
+532452*
+1A A(

@@ -1,0 +1,513 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137840054*java2.Bº
+w
+rBackend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/service/ConversationService.java2
+	
+type3
+	
+MAIN4
+
+package6
+0
++com.example.assistant_therapeutique.service7
+D
+?com.example.assistant_therapeutique.service.ConversationService9
+
+class10
+
+access11
+
+public12
+
+
+full-range13
+
+(14:1)-(60:2)14
+
+simple-name15
+
+ConversationService16
+
+Service18
+
+unknown19
+
+annotated by20
+%
+Recovered#typeBindingLService;022
+
+
+uses23
+\
+Vcom.example.assistant_therapeutique.service.ConversationService.conversationRepository25
+
+field26
+
+private27
+
+(17:5)-(18:59)28
+
+conversationRepository29
+K
+Ecom.example.assistant_therapeutique.repository.ConversationRepository31
+
+is type32
+
+	Autowired34
+'
+!Recovered#typeBindingLAutowired;036
+T
+Ncom.example.assistant_therapeutique.service.ConversationService.userRepository38
+
+(20:5)-(21:43)39
+
+userRepository40
+C
+=com.example.assistant_therapeutique.repository.UserRepository42
+€
+zcom.example.assistant_therapeutique.service.ConversationService#getConversationsByUserId(Ljava/lang/Long;)Ljava/util/List;44
+
+method45
+
+(23:5)-(25:6)46
+
+getConversationsByUserId47
+<
+6com.example.assistant_therapeutique.model.Conversation49
+
+
+references50
+z
+tcom.example.assistant_therapeutique.repository.ConversationRepository#findByUserId(Ljava/lang/Long;)Ljava/util/List;52
+
+calls53
+
+ycom.example.assistant_therapeutique.service.ConversationService#getConversationById(Ljava/lang/Long;)Ljava/util/Optional;55
+
+(27:5)-(29:6)56
+
+getConversationById57
+µ
+®com.example.assistant_therapeutique.service.ConversationService#createConversation(Ljava/lang/Long;Ljava/lang/String;)Lcom/example/assistant_therapeutique/model/Conversation;59
+
+(31:5)-(44:6)60
+
+createConversation61
+
+returns62
+4
+.com.example.assistant_therapeutique.model.User64
+Z
+Tcom.example.assistant_therapeutique.model.Conversation#setTitre(Ljava/lang/String;)V66
+w
+qcom.example.assistant_therapeutique.model.Conversation#setUser(Lcom/example/assistant_therapeutique/model/User;)V68
+e
+_com.example.assistant_therapeutique.model.Conversation#setCreatedAt(Ljava/time/LocalDateTime;)V70
+É
+Âcom.example.assistant_therapeutique.service.ConversationService#saveConversation(Lcom/example/assistant_therapeutique/model/Conversation;)Lcom/example/assistant_therapeutique/model/Conversation;72
+
+(46:5)-(48:6)73
+
+saveConversation74
+
+	has param75
+k
+ecom.example.assistant_therapeutique.service.ConversationService#deleteConversation(Ljava/lang/Long;)V77
+
+(50:5)-(52:6)78
+
+deleteConversation79
+®
+§com.example.assistant_therapeutique.service.ConversationService#updateTitle(Ljava/lang/Long;Ljava/lang/String;)Lcom/example/assistant_therapeutique/model/Conversation;81
+
+(54:5)-(59:6)82
+
+updateTitle83J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576j±
+M
+43G
+434445 *
+1 (728:5B$
+
+
+11
+12
+
+
+13
+46
+
+
+15
+47
+M
+24G
+242526 *
+1$ (:28:5B$
+
+
+11
+27
+
+
+13
+28
+
+
+15
+29
+
+21
+212219
+G
+8B
+8910 *
+1 (!:5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+
+17
+171819
+M
+76G
+767745 *
+12 2(#28:5B$
+
+
+11
+12
+
+
+13
+78
+
+
+15
+79
+M
+54G
+545545 *
+1# (628:5B$
+
+
+11
+12
+
+
+13
+56
+
+
+15
+57
+
+63
+636419
+M
+37G
+373826 *
+1 (*28:5B$
+
+
+11
+27
+
+
+13
+39
+
+
+15
+40
+
+48
+484919
+
+65
+656619
+
+67
+676819
+
+69
+697019
+M
+71G
+717245 *
+1. .()28:5B$
+
+
+11
+12
+
+
+13
+73
+
+
+15
+74
+
+33
+333419
+
+41
+414219
+M
+80G
+808145 *
+16 6($28:5B$
+
+
+11
+12
+
+
+13
+82
+
+
+15
+83
+
+35
+353619
+M
+58G
+585945 *
+1 (+28:5B$
+
+
+11
+12
+
+
+13
+60
+
+
+15
+61
+
+30
+303119
+
+51
+515219rô
+
+81720*
+1 (	
+
+82123*
+1 (	
+
+243032*
+1 (#
+
+243320*
+1 (
+
+243523*
+1 (
+
+243023*
+1 (#
+
+243023*
+1$ (:
+
+374132*
+1 (
+
+373320*
+1 (
+
+373523*
+1 (
+
+374123*
+1 (
+
+374123*
+1 (*
+
+434823*
+1 (
+
+433050*
+1 (3
+
+435153*
+1' (3
+
+432450*
+1 (&
+
+433023*
+1 (&
+
+432450*
+1 (&
+
+544823*
+1 (!
+
+542450*
+1 (&
+
+543023*
+1 (&
+
+542450*
+1 (&
+
+584862*
+1 (
+
+584823*
+1 (
+
+586323*
+1   (
+
+583750*
+1 '  (5
+
+584123*
+1 '  (5
+
+583750*
+1 '  (5
+
+586332*
+1$ $(
+
+586323*
+1$	 $(
+
+586362*
+1$ $(%
+
+584832*
+1& &("
+
+584823*
+1&	 &(
+
+584853*
+1&) &(5
+
+584850*
+1'	 '(
+
+586553*
+1' '(
+
+584850*
+1(	 ((
+
+586753*
+1( ((
+
+584850*
+1)	 )("
+
+586953*
+1) )("
+
+582450*
+1+ +(&
+
+583023*
+1+ +(&
+
+582450*
+1+ +(&
+
+714862*
+1. .(
+
+714875*
+1.* .(6
+
+714823*
+1. .(
+
+714832*
+1.7 .(C
+
+714823*
+1.* .(6
+
+712450*
+1/ /(&
+
+713023*
+1/ /(&
+
+712450*
+1/ /(&
+
+762450*
+13	 3(
+
+763023*
+13	 3(
+
+762450*
+13	 3(
+
+804862*
+16 6(
+
+804823*
+16 6(
+
+804832*
+17 7("
+
+804823*
+17	 7(
+
+802450*
+17% 7(;
+
+803023*
+17% 7(;
+
+802450*
+17% 7(;
+
+804850*
+19	 9(
+
+806553*
+19 9(
+
+802450*
+1: :(&
+
+803023*
+1: :(&
+
+802450*
+1: :(&

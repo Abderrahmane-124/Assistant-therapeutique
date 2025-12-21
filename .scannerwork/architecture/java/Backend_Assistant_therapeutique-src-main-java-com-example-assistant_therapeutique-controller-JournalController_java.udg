@@ -1,0 +1,660 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137839883*java2.B›
+x
+sBackend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/controller/JournalController.java2
+	
+type3
+	
+MAIN4
+
+package6
+3
+.com.example.assistant_therapeutique.controller7
+E
+@com.example.assistant_therapeutique.controller.JournalController9
+
+class10
+
+access11
+
+public12
+
+
+full-range13
+
+(14:1)-(58:2)14
+
+simple-name15
+
+JournalController16
+
+RestController18
+
+unknown19
+
+annotated by20
+,
+&Recovered#typeBindingLRestController;022
+
+
+uses23
+
+RequestMapping25
+,
+&Recovered#typeBindingLRequestMapping;027
+U
+Ocom.example.assistant_therapeutique.controller.JournalController.journalService29
+
+field30
+
+private31
+
+(18:5)-(19:43)32
+
+journalService33
+@
+:com.example.assistant_therapeutique.service.JournalService35
+
+is type36
+
+	Autowired38
+'
+!Recovered#typeBindingLAutowired;040
+|
+vcom.example.assistant_therapeutique.controller.JournalController#getJournalsByUserId(Ljava/lang/Long;)Ljava/util/List;42
+
+method43
+
+(21:5)-(24:6)44
+
+getJournalsByUserId45
+
+
+GetMapping47
+(
+"Recovered#typeBindingLGetMapping;049
+7
+1com.example.assistant_therapeutique.model.Journal51
+
+PathVariable53
+*
+$Recovered#typeBindingLPathVariable;055
+
+
+references56
+v
+pcom.example.assistant_therapeutique.service.JournalService#getJournalsByUserId(Ljava/lang/Long;)Ljava/util/List;58
+
+calls59
+w
+qcom.example.assistant_therapeutique.controller.JournalController#getJournalById(Ljava/lang/Long;)LResponseEntity;61
+
+(26:5)-(31:6)62
+
+getJournalById63
+
+ResponseEntity65
+
+returns66
+u
+ocom.example.assistant_therapeutique.service.JournalService#getJournalById(Ljava/lang/Long;)Ljava/util/Optional;68
+¢
+›com.example.assistant_therapeutique.controller.JournalController#createJournal(Lcom/example/assistant_therapeutique/dto/JournalRequestDTO;)LResponseEntity;70
+
+(33:5)-(37:6)71
+
+createJournal72
+?
+9com.example.assistant_therapeutique.dto.JournalRequestDTO74
+
+	has param75
+
+PostMapping77
+)
+#Recovered#typeBindingLPostMapping;079
+
+RequestBody81
+)
+#Recovered#typeBindingLRequestBody;083
+Ä
+½com.example.assistant_therapeutique.service.JournalService#createJournalEntry(Lcom/example/assistant_therapeutique/dto/JournalRequestDTO;)Lcom/example/assistant_therapeutique/model/Journal;85
+ª
+£com.example.assistant_therapeutique.controller.JournalController#updateJournal(Ljava/lang/Long;Lcom/example/assistant_therapeutique/model/Journal;)LResponseEntity;87
+
+(39:5)-(51:6)88
+
+updateJournal89
+
+
+PutMapping91
+(
+"Recovered#typeBindingLPutMapping;093
+U
+Ocom.example.assistant_therapeutique.model.Journal#setTitle(Ljava/lang/String;)V95
+T
+Ncom.example.assistant_therapeutique.model.Journal#getTitle()Ljava/lang/String;97
+W
+Qcom.example.assistant_therapeutique.model.Journal#setContent(Ljava/lang/String;)V99
+W
+Pcom.example.assistant_therapeutique.model.Journal#getContent()Ljava/lang/String;101
+¶
+®com.example.assistant_therapeutique.service.JournalService#saveJournal(Lcom/example/assistant_therapeutique/model/Journal;)Lcom/example/assistant_therapeutique/model/Journal;103
+w
+pcom.example.assistant_therapeutique.controller.JournalController#deleteJournal(Ljava/lang/Long;)LResponseEntity;105
+
+(53:5)-(57:6)106
+
+deleteJournal107
+
+DeleteMapping109
+,
+%Recovered#typeBindingLDeleteMapping;0111
+b
+[com.example.assistant_therapeutique.service.JournalService#deleteJournal(Ljava/lang/Long;)V113J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576j£	
+
+96
+969719
+
+110
+11011119
+
+57
+575819
+
+67
+676819
+
+21
+212219
+
+17
+171819
+
+54
+545519
+
+24
+242519
+
+100
+10010119
+
+37
+373819
+M
+60G
+606143 *
+1$ (228:5B$
+
+
+11
+12
+
+
+13
+62
+
+
+15
+63
+
+76
+767719
+
+108
+10810919
+
+94
+949519
+
+26
+262719
+
+34
+343519
+M
+41G
+414243 *
+1 (-28:5B$
+
+
+11
+12
+
+
+13
+44
+
+
+15
+45
+
+48
+484919
+R
+104K
+10410543 *
+16! 6(.28:5B&
+
+
+11
+12
+
+13
+106
+
+15
+107
+
+80
+808119
+
+98
+989919
+
+84
+848519
+
+73
+737419
+
+92
+929319
+G
+8B
+8910 *
+1 (:5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+
+82
+828319
+M
+86G
+868743 *
+1($ ((128:5B$
+
+
+11
+12
+
+
+13
+88
+
+
+15
+89
+
+78
+787919
+M
+28G
+282930 *
+1 (*28:5B$
+
+
+11
+31
+
+
+13
+32
+
+
+15
+33
+
+64
+646519
+M
+69G
+697043 *
+1"$ "(128:5B$
+
+
+11
+12
+
+
+13
+71
+
+
+15
+72
+
+46
+464719
+
+102
+10210319
+
+112
+11211319
+
+39
+394019
+
+90
+909119
+
+50
+505119
+
+52
+525319râ
+
+81720*
+1 (
+
+82123*
+1 (
+
+82420*
+1 (!
+
+82623*
+1 (
+
+283436*
+1 (
+
+283720*
+1 (
+
+283923*
+1 (
+
+283423*
+1 (
+
+283423*
+1 (*
+
+414620*
+1 ("
+
+414823*
+1 (
+
+415023*
+1 (
+
+415220*
+1. (;
+
+415423*
+1/ (;
+
+413456*
+1 (2
+
+415759*
+1 (2
+
+412856*
+1 (
+
+413423*
+1 (
+
+412856*
+1 (
+
+606466*
+1 (#
+
+604620*
+1 (
+
+604823*
+1 (
+
+606423*
+1 (
+
+605023*
+1 ("
+
+605220*
+13 (@
+
+605423*
+14 (@
+
+605023*
+1 (
+
+603456*
+1% (B
+
+606759*
+14 (B
+
+602856*
+1% (3
+
+603423*
+1% (3
+
+602856*
+1% (3
+
+696466*
+1" "(#
+
+697375*
+1"? "(P
+
+697620*
+1! !(
+
+697823*
+1! !(
+
+696423*
+1" "(
+
+695023*
+1" "("
+
+697336*
+1"Q "(b
+
+698020*
+1"2 "(>
+
+698223*
+1"3 "(>
+
+697323*
+1"? "(P
+
+695036*
+1# #(
+
+695023*
+1#	 #(
+
+695066*
+1#  #(A
+
+693456*
+1#  #(A
+
+698459*
+1#/ #(A
+
+692856*
+1#  #(.
+
+693423*
+1#  #(.
+
+692856*
+1#  #(.
+
+866466*
+1( ((#
+
+865075*
+1(V ((]
+
+869020*
+1' '(
+
+869223*
+1' '(
+
+866423*
+1( ((
+
+865023*
+1( (("
+
+865220*
+1(2 ((?
+
+865423*
+1(3 ((?
+
+865036*
+1(^ ((l
+
+868020*
+1(I ((U
+
+868223*
+1(J ((U
+
+865023*
+1(V ((]
+
+865023*
+1) )(
+
+863456*
+1)- )(J
+
+866759*
+1)< )(J
+
+862856*
+1)- )(;
+
+863423*
+1)- )(;
+
+862856*
+1)- )(;
+
+865036*
+1+ +(
+
+865023*
+1+ +(
+
+865066*
+1+ +(2
+
+865056*
+1, ,(
+
+869459*
+1, ,(
+
+865056*
+1, ,(5
+
+869659*
+1,- ,(5
+
+865056*
+1- -(
+
+869859*
+1- -(
+
+865056*
+1-  -(9
+
+8610059*
+1-/ -(9
+
+865036*
+1. .(#
+
+865023*
+1. .(
+
+865066*
+1.& .(@
+
+863456*
+1.& .(@
+
+8610259*
+1.5 .(@
+
+862856*
+1.& .(4
+
+863423*
+1.& .(4
+
+862856*
+1.& .(4
+
+1046466*
+16 6( 
+
+10410820*
+15 5(
+
+10411023*
+15 5(
+
+1046423*
+16 6(
+
+1045220*
+16/ 6(<
+
+1045423*
+160 6(<
+
+1043456*
+17	 7(%
+
+10411259*
+17 7(%
+
+1042856*
+17	 7(
+
+1043423*
+17	 7(
+
+1042856*
+17	 7(

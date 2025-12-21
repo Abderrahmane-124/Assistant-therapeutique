@@ -1,0 +1,289 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137839025*java2.BÃ
+v
+qBackend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/dto/ConversationRequestDTO.java2
+	
+type3
+	
+MAIN4
+
+package6
+,
+'com.example.assistant_therapeutique.dto7
+C
+>com.example.assistant_therapeutique.dto.ConversationRequestDTO9
+
+class10
+
+access11
+
+public12
+
+
+full-range13
+
+(3:1)-(32:2)14
+
+simple-name15
+
+ConversationRequestDTO16
+J
+Dcom.example.assistant_therapeutique.dto.ConversationRequestDTO.titre18
+
+field19
+
+private20
+
+(4:5)-(4:26)21
+
+titre22
+K
+Ecom.example.assistant_therapeutique.dto.ConversationRequestDTO.userId24
+
+(5:5)-(5:25)25
+
+userId26
+N
+Hcom.example.assistant_therapeutique.dto.ConversationRequestDTO#<init>()V28
+
+method29
+
+(8:5)-(9:6)30
+
+calls31
+p
+jcom.example.assistant_therapeutique.dto.ConversationRequestDTO#<init>(Ljava/lang/String;Ljava/lang/Long;)V33
+
+(11:5)-(14:6)34
+
+
+uses35
+
+
+references36
+a
+[com.example.assistant_therapeutique.dto.ConversationRequestDTO#getTitre()Ljava/lang/String;38
+
+(17:5)-(19:6)39
+
+getTitre40
+b
+\com.example.assistant_therapeutique.dto.ConversationRequestDTO#setTitre(Ljava/lang/String;)V42
+
+(21:5)-(23:6)43
+
+setTitre44
+`
+Zcom.example.assistant_therapeutique.dto.ConversationRequestDTO#getUserId()Ljava/lang/Long;46
+
+(25:5)-(27:6)47
+
+	getUserId48
+a
+[com.example.assistant_therapeutique.dto.ConversationRequestDTO#setUserId(Ljava/lang/Long;)V50
+
+(29:5)-(31:6)51
+
+	setUserId52J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576j¡
+M
+27G
+272829 *
+1 ("28:5B$
+
+
+11
+12
+
+
+13
+30
+
+
+15
+16
+M
+23G
+232419 *
+1 (28:5B$
+
+
+11
+20
+
+
+13
+25
+
+
+15
+26
+M
+45G
+454629 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+47
+
+
+15
+48
+M
+32G
+323329 *
+1 ("28:5B$
+
+
+11
+12
+
+
+13
+34
+
+
+15
+16
+M
+37G
+373829 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+39
+
+
+15
+40
+M
+41G
+414229 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+43
+
+
+15
+44
+G
+8B
+8910 *
+1 ($:5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+M
+17G
+171819 *
+1 (28:5B$
+
+
+11
+20
+
+
+13
+21
+
+
+15
+22
+M
+49G
+495029 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+51
+
+
+15
+52r¶
+
+27831*
+1 ("
+
+32831*
+1 ("
+
+32835*
+1	 (
+
+32836*
+1	 (
+
+321736*
+1 (
+
+32835*
+1	 (
+
+32836*
+1	 (
+
+322336*
+1 (
+
+371736*
+1 (
+
+41835*
+1	 (
+
+41836*
+1	 (
+
+411736*
+1 (
+
+452336*
+1 (
+
+49835*
+1	 (
+
+49836*
+1	 (
+
+492336*
+1 (

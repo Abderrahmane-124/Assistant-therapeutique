@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.example.assistant_therapeutique.controller.MoodControllerTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.066 s -- in com.example.assistant_therapeutique.controller.MoodControllerTest

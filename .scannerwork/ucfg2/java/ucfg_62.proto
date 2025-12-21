@@ -1,0 +1,63 @@
+
+‚com.example.assistant_therapeutique.controller.ChatMessageController#getMessagesByConversationId(Ljava/lang/Long;)Ljava/util/List;É
+¾C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/controller/ChatMessageController.java (8"startingBlock*Ä
+startingBlock8 ([‹
+ˆ
+ (;
+%2"
+__annotate**
+
+__unknown_file (
+
+GetMapping*>
+
+__unknown_file ("
+ 
+conversationIdjava.lang.Long
+Š
+9 (F
+%3"
+__annotate*,
+
+__unknown_file (
+PathVariable*>
+
+__unknown_file ("
+ 
+conversationIdjava.lang.Long…
+‚
+L (Z 
+conversationIdjava.lang.Long"__annotation*"
+
+__unknown_file (
+
+%2*"
+
+__unknown_file (
+
+%3*
+1*‚
+1   (!×
+Ô
+   (!D
+%0>com.example.assistant_therapeutique.service.ChatMessageService"__id*|
+
+__unknown_file (`*^F
+Dcom.example.assistant_therapeutique.controller.ChatMessageController"
+chatMessageServiceôñ
+   (M
+%1java.util.List"|com.example.assistant_therapeutique.service.ChatMessageService#getMessagesByConversationId(Ljava/lang/Long;)Ljava/util/List;*b
+
+__unknown_file (F
+D
+%0>com.example.assistant_therapeutique.service.ChatMessageService*>
+
+__unknown_file ("
+ 
+conversationIdjava.lang.Long2-getMessagesByConversationId(Ljava/lang/Long;)""
+   (N
+
+%1java.util.List:,
+9 (Z 
+conversationIdjava.lang.LongBHF
+Dcom.example.assistant_therapeutique.controller.ChatMessageControllerH

@@ -1,0 +1,15 @@
+
+pcom.example.assistant_therapeutique.model.Conversation#getUser()Lcom/example/assistant_therapeutique/model/User;»
+°C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/model/Conversation.java6 6("1*ÿ
+17 7(«
+¨
+7 7(4
+%0.com.example.assistant_therapeutique.model.User"__id*`
+
+__unknown_file (D*B8
+6com.example.assistant_therapeutique.model.Conversation"
+user"B
+7 7(6
+4
+%0.com.example.assistant_therapeutique.model.UserB:8
+6com.example.assistant_therapeutique.model.ConversationH

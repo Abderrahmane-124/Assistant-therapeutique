@@ -1,0 +1,15 @@
+
+\com.example.assistant_therapeutique.dto.ChatMessageRequestDTO#getContent()Ljava/lang/String;Â
+·C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/dto/ChatMessageRequestDTO.java# #("1*Í
+1$ $(—
+”
+$ $(
+%0java.lang.String"__id*j
+
+__unknown_file (N*L?
+=com.example.assistant_therapeutique.dto.ChatMessageRequestDTO"	
+content"$
+$ $(
+
+%0java.lang.StringBA?
+=com.example.assistant_therapeutique.dto.ChatMessageRequestDTOH

@@ -1,0 +1,686 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137839683*java2.B‹
+u
+pBackend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/controller/UserController.java2
+	
+type3
+	
+MAIN4
+
+package6
+3
+.com.example.assistant_therapeutique.controller7
+B
+=com.example.assistant_therapeutique.controller.UserController9
+
+class10
+
+access11
+
+public12
+
+
+full-range13
+
+(17:1)-(99:2)14
+
+simple-name15
+
+UserController16
+
+RestController18
+
+unknown19
+
+annotated by20
+,
+&Recovered#typeBindingLRestController;022
+
+
+uses23
+
+RequestMapping25
+,
+&Recovered#typeBindingLRequestMapping;027
+O
+Icom.example.assistant_therapeutique.controller.UserController.userService29
+
+field30
+
+private31
+
+(21:5)-(22:37)32
+
+userService33
+=
+7com.example.assistant_therapeutique.service.UserService35
+
+is type36
+
+	Autowired38
+'
+!Recovered#typeBindingLAutowired;040
+Z
+Tcom.example.assistant_therapeutique.controller.UserController.conversationRepository42
+
+(24:5)-(25:59)43
+
+conversationRepository44
+K
+Ecom.example.assistant_therapeutique.repository.ConversationRepository46
+U
+Ocom.example.assistant_therapeutique.controller.UserController.journalRepository48
+
+(27:5)-(28:49)49
+
+journalRepository50
+F
+@com.example.assistant_therapeutique.repository.JournalRepository52
+R
+Lcom.example.assistant_therapeutique.controller.UserController.moodRepository54
+
+(30:5)-(31:43)55
+
+moodRepository56
+C
+=com.example.assistant_therapeutique.repository.MoodRepository58
+q
+kcom.example.assistant_therapeutique.controller.UserController#getUserById(Ljava/lang/Long;)LResponseEntity;60
+
+method61
+
+(33:5)-(48:6)62
+
+getUserById63
+
+ResponseEntity65
+
+returns66
+
+
+GetMapping68
+(
+"Recovered#typeBindingLGetMapping;070
+
+PathVariable72
+*
+$Recovered#typeBindingLPathVariable;074
+4
+.com.example.assistant_therapeutique.model.User76
+
+
+references77
+l
+fcom.example.assistant_therapeutique.service.UserService#findById(Ljava/lang/Long;)Ljava/util/Optional;79
+
+calls80
+L
+Fcom.example.assistant_therapeutique.model.User#getId()Ljava/lang/Long;82
+T
+Ncom.example.assistant_therapeutique.model.User#getUsername()Ljava/lang/String;84
+
+ycom.example.assistant_therapeutique.controller.UserController#updateUser(Ljava/lang/Long;Ljava/util/Map;)LResponseEntity;86
+
+(50:5)-(76:6)87
+
+
+updateUser88
+
+
+PutMapping90
+(
+"Recovered#typeBindingLPutMapping;092
+
+RequestBody94
+)
+#Recovered#typeBindingLRequestBody;096
+U
+Ocom.example.assistant_therapeutique.model.User#setUsername(Ljava/lang/String;)V98
+V
+Ocom.example.assistant_therapeutique.model.User#setPassword(Ljava/lang/String;)V100
+ª
+¢com.example.assistant_therapeutique.service.UserService#saveUser(Lcom/example/assistant_therapeutique/model/User;)Lcom/example/assistant_therapeutique/model/User;102
+s
+lcom.example.assistant_therapeutique.controller.UserController#getUserStats(Ljava/lang/Long;)LResponseEntity;104
+
+(78:5)-(98:6)105
+
+getUserStats106
+{
+tcom.example.assistant_therapeutique.repository.ConversationRepository#findByUserId(Ljava/lang/Long;)Ljava/util/List;108
+v
+ocom.example.assistant_therapeutique.repository.JournalRepository#findByUserId(Ljava/lang/Long;)Ljava/util/List;110
+s
+lcom.example.assistant_therapeutique.repository.MoodRepository#findByUserId(Ljava/lang/Long;)Ljava/util/List;112J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576jÈ	
+
+111
+11111219
+M
+41G
+414230 *
+1$ (:28:5B$
+
+
+11
+31
+
+
+13
+43
+
+
+15
+44
+
+21
+212219
+
+17
+171819
+
+73
+737419
+
+78
+787919
+
+109
+10911019
+
+24
+242519
+M
+59G
+596061 *
+1" "()28:5B$
+
+
+11
+12
+
+
+13
+62
+
+
+15
+63
+M
+85G
+858661 *
+13 3((28:5B$
+
+
+11
+12
+
+
+13
+87
+
+
+15
+88
+
+101
+10110219
+
+37
+373819
+
+57
+575819
+M
+53G
+535430 *
+1 (*28:5B$
+
+
+11
+31
+
+
+13
+55
+
+
+15
+56
+
+26
+262719
+M
+47G
+474830 *
+1 (028:5B$
+
+
+11
+31
+
+
+13
+49
+
+
+15
+50
+
+69
+697019
+
+99
+9910019
+
+107
+10710819
+
+93
+939419
+R
+103K
+10310461 *
+1O O(*28:5B&
+
+
+11
+12
+
+13
+105
+
+15
+106
+
+91
+919219
+M
+28G
+282930 *
+1 ($28:5B$
+
+
+11
+31
+
+
+13
+32
+
+
+15
+33
+
+95
+959619
+
+75
+757619
+G
+8B
+8910 *
+1 (:5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+
+83
+838419
+
+64
+646519
+
+67
+676819
+
+34
+343519
+
+39
+394019
+
+89
+899019
+
+97
+979819
+
+45
+454619
+
+51
+515219
+
+81
+818219
+
+71
+717219rø
+
+81720*
+1 (
+
+82123*
+1 (
+
+82420*
+1 (
+
+82623*
+1 (
+
+283436*
+1 (
+
+283720*
+1 (
+
+283923*
+1 (
+
+283423*
+1 (
+
+283423*
+1 ($
+
+414536*
+1 (#
+
+413720*
+1 (
+
+413923*
+1 (
+
+414523*
+1 (#
+
+414523*
+1$ (:
+
+475136*
+1 (
+
+473720*
+1 (
+
+473923*
+1 (
+
+475123*
+1 (
+
+475123*
+1 (0
+
+535736*
+1 (
+
+533720*
+1 (
+
+533923*
+1 (
+
+535723*
+1 (
+
+535723*
+1 (*
+
+596466*
+1" "(
+
+596720*
+1! !(
+
+596923*
+1! !(
+
+596423*
+1" "(
+
+597120*
+1"* "(7
+
+597323*
+1"+ "(7
+
+597523*
+1# #(
+
+593477*
+1# #(3
+
+597880*
+1#+ #(3
+
+592877*
+1# #(*
+
+593423*
+1# #(*
+
+592877*
+1# #(*
+
+597536*
+1& &(
+
+597523*
+1& &(
+
+597566*
+1& &(&
+
+597577*
+1(  ((/
+
+598180*
+1(* ((/
+
+597577*
+1)& )(;
+
+598380*
+1)0 )(;
+
+856466*
+13 3(
+
+858920*
+12 2(
+
+859123*
+12 2(
+
+856423*
+13 3(
+
+857120*
+13) 3(6
+
+857323*
+13* 3(6
+
+859320*
+13@ 3(L
+
+859523*
+13A 3(L
+
+857523*
+14 4(
+
+853477*
+14' 4(;
+
+857880*
+143 4(;
+
+852877*
+14' 4(2
+
+853423*
+14' 4(2
+
+852877*
+14' 4(2
+
+857536*
+16 6(
+
+857523*
+16 6(
+
+857566*
+16 6()
+
+857577*
+1: :(!
+
+859780*
+1: :(!
+
+857577*
+1? ?(!
+
+859980*
+1? ?(!
+
+857536*
+1B B(
+
+857523*
+1B B(
+
+857566*
+1B B(2
+
+853477*
+1B B(2
+
+8510180*
+1B* B(2
+
+852877*
+1B B()
+
+853423*
+1B B()
+
+852877*
+1B B()
+
+857577*
+1D  D(/
+
+858180*
+1D* D(/
+
+857577*
+1E& E(;
+
+858380*
+1E0 E(;
+
+1036466*
+1O O(
+
+1036720*
+1N N(
+
+1036923*
+1N N(
+
+1036423*
+1O O(
+
+1037120*
+1O+ O(8
+
+1037323*
+1O, O(8
+
+1037523*
+1P P(
+
+1033477*
+1P P(3
+
+1037880*
+1P+ P(3
+
+1032877*
+1P P(*
+
+1033423*
+1P P(*
+
+1032877*
+1P P(*
+
+1034577*
+1S& S(I
+
+10310780*
+1S= S(I
+
+1034177*
+1S& S(<
+
+1034523*
+1S& S(<
+
+1034177*
+1S& S(<
+
+1035177*
+1T' T(E
+
+10310980*
+1T9 T(E
+
+1034777*
+1T' T(8
+
+1035123*
+1T' T(8
+
+1034777*
+1T' T(8
+
+1035777*
+1U$ U(?
+
+10311180*
+1U3 U(?
+
+1035377*
+1U$ U(2
+
+1035723*
+1U$ U(2
+
+1035377*
+1U$ U(2

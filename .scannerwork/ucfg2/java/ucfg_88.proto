@@ -1,0 +1,27 @@
+
+zcom.example.assistant_therapeutique.service.ConversationService#getConversationsByUserId(Ljava/lang/Long;)Ljava/util/List;Ä
+¹C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/service/ConversationService.java (6"1*ð
+1 (%Ý
+Ú
+ (%K
+%0Ecom.example.assistant_therapeutique.repository.ConversationRepository"__id*{
+
+__unknown_file (_*]A
+?com.example.assistant_therapeutique.service.ConversationService"
+conversationRepositoryÜÙ
+ (:
+%1java.util.List"tcom.example.assistant_therapeutique.repository.ConversationRepository#findByUserId(Ljava/lang/Long;)Ljava/util/List;*i
+
+__unknown_file (M
+K
+%0Ecom.example.assistant_therapeutique.repository.ConversationRepository*6
+
+__unknown_file (
+
+userIdjava.lang.Long2findByUserId(Ljava/lang/Long;)""
+ (;
+
+%1java.util.List:$
+7 (B
+userIdjava.lang.LongBCA
+?com.example.assistant_therapeutique.service.ConversationServiceH

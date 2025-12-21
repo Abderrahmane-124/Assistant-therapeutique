@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.example.assistant_therapeutique.controller.JournalControllerTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.026 s -- in com.example.assistant_therapeutique.controller.JournalControllerTest

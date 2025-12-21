@@ -1,0 +1,136 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137839930*java2.B¶
+u
+pBackend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/repository/UserRepository.java2
+	
+type3
+	
+MAIN4
+
+package6
+3
+.com.example.assistant_therapeutique.repository7
+B
+=com.example.assistant_therapeutique.repository.UserRepository9
+
+	interface10
+
+access11
+
+public12
+
+
+full-range13
+
+(9:1)-(12:2)14
+
+simple-name15
+
+UserRepository16
++
+%Recovered#typeBindingLJpaRepository;018
+
+unknown19
+
+
+implements20
+
+
+Repository22
+
+annotated by23
+(
+"Recovered#typeBindingLRepository;025
+
+
+uses26
+4
+.com.example.assistant_therapeutique.model.User28
+z
+tcom.example.assistant_therapeutique.repository.UserRepository#findByUsername(Ljava/lang/String;)Ljava/util/Optional;30
+
+method31
+
+(11:5)-(11:52)32
+
+findByUsername33J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576jË
+
+17
+171819
+
+21
+212219
+G
+8B
+8910 *
+1
+ 
+( :5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+
+24
+242519
+
+27
+272819
+M
+29G
+293031 *
+1 ("28:5B$
+
+
+11
+12
+
+
+13
+32
+
+
+15
+33rù
+
+81720*
+1
+) 
+(B
+
+82123*
+1	 	(
+
+82426*
+1	 	(
+
+81726*
+1
+) 
+(6
+
+82726*
+1
+7 
+(;
+
+292726*
+1 (

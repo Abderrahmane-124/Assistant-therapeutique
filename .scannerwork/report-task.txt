@@ -1,0 +1,7 @@
+organization=sonar-test-abdo
+projectKey=sonar-test-abdo_assistant-therapeutique
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.77855
+dashboardUrl=https://sonarcloud.io/dashboard?id=sonar-test-abdo_assistant-therapeutique
+ceTaskId=AZs2CDyY29bqyg2L9QOA
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZs2CDyY29bqyg2L9QOA

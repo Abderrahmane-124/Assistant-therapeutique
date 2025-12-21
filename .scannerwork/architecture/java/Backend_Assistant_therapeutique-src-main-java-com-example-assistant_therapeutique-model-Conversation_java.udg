@@ -1,0 +1,704 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137837450*java2.Bº
+n
+iBackend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/model/Conversation.java2
+	
+type3
+	
+MAIN4
+
+package6
+.
+)com.example.assistant_therapeutique.model7
+;
+6com.example.assistant_therapeutique.model.Conversation9
+
+class10
+
+access11
+
+public12
+
+
+full-range13
+
+(8:1)-(77:2)14
+
+simple-name15
+
+Conversation16
+
+Entity18
+
+unknown19
+
+annotated by20
+$
+Recovered#typeBindingLEntity;022
+
+
+uses23
+?
+9com.example.assistant_therapeutique.model.Conversation.id25
+
+field26
+
+private27
+
+(11:5)-(13:21)28
+
+id29
+
+Id31
+ 
+Recovered#typeBindingLId;033
+
+GeneratedValue35
+,
+&Recovered#typeBindingLGeneratedValue;037
+B
+<com.example.assistant_therapeutique.model.Conversation.titre39
+
+(15:5)-(15:26)40
+
+titre41
+A
+;com.example.assistant_therapeutique.model.Conversation.user43
+
+(17:5)-(19:23)44
+
+
+user45
+4
+.com.example.assistant_therapeutique.model.User47
+
+is type48
+
+	ManyToOne50
+'
+!Recovered#typeBindingLManyToOne;052
+
+
+JoinColumn54
+(
+"Recovered#typeBindingLJoinColumn;056
+F
+@com.example.assistant_therapeutique.model.Conversation.createdAt58
+
+(21:5)-(21:37)59
+
+	createdAt60
+E
+?com.example.assistant_therapeutique.model.Conversation.messages62
+
+(23:5)-(25:40)63
+
+messages64
+
+	OneToMany66
+'
+!Recovered#typeBindingLOneToMany;068
+
+JsonManagedReference70
+2
+,Recovered#typeBindingLJsonManagedReference;072
+;
+5com.example.assistant_therapeutique.model.ChatMessage74
+F
+@com.example.assistant_therapeutique.model.Conversation#<init>()V76
+
+method77
+
+(28:5)-(29:6)78
+
+calls79
+¢
+õcom.example.assistant_therapeutique.model.Conversation#<init>(Ljava/lang/String;Lcom/example/assistant_therapeutique/model/User;Ljava/time/LocalDateTime;)V81
+
+(31:5)-(35:6)82
+
+	has param83
+
+
+references84
+T
+Ncom.example.assistant_therapeutique.model.Conversation#getId()Ljava/lang/Long;86
+
+(38:5)-(40:6)87
+
+getId88
+U
+Ocom.example.assistant_therapeutique.model.Conversation#setId(Ljava/lang/Long;)V90
+
+(42:5)-(44:6)91
+
+setId92
+Y
+Scom.example.assistant_therapeutique.model.Conversation#getTitre()Ljava/lang/String;94
+
+(46:5)-(48:6)95
+
+getTitre96
+Z
+Tcom.example.assistant_therapeutique.model.Conversation#setTitre(Ljava/lang/String;)V98
+
+(50:5)-(52:6)99
+
+setTitre100
+w
+pcom.example.assistant_therapeutique.model.Conversation#getUser()Lcom/example/assistant_therapeutique/model/User;102
+
+(54:5)-(56:6)103
+
+getUser104
+
+returns105
+x
+qcom.example.assistant_therapeutique.model.Conversation#setUser(Lcom/example/assistant_therapeutique/model/User;)V107
+
+(58:5)-(60:6)108
+
+setUser109
+e
+^com.example.assistant_therapeutique.model.Conversation#getCreatedAt()Ljava/time/LocalDateTime;111
+
+(62:5)-(64:6)112
+
+getCreatedAt113
+f
+_com.example.assistant_therapeutique.model.Conversation#setCreatedAt(Ljava/time/LocalDateTime;)V115
+
+(66:5)-(68:6)116
+
+setCreatedAt117
+[
+Tcom.example.assistant_therapeutique.model.Conversation#getMessages()Ljava/util/List;119
+
+(70:5)-(72:6)120
+
+getMessages121
+\
+Ucom.example.assistant_therapeutique.model.Conversation#setMessages(Ljava/util/List;)V123
+
+(74:5)-(76:6)124
+
+setMessages125J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576jÁ
+M
+24G
+242526 *
+1 (28:5B$
+
+
+11
+27
+
+
+13
+28
+
+
+15
+29
+
+67
+676819
+
+17
+171819
+
+71
+717219
+M
+57G
+575826 *
+1 ($28:5B$
+
+
+11
+27
+
+
+13
+59
+
+
+15
+60
+M
+75G
+757677 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+78
+
+
+15
+16
+R
+101K
+10110277 *
+16 6(28:5B&
+
+
+11
+12
+
+13
+103
+
+15
+104
+M
+93G
+939477 *
+1. .(28:5B$
+
+
+11
+12
+
+
+13
+95
+
+
+15
+96
+R
+118K
+11811977 *
+1F F()28:5B&
+
+
+11
+12
+
+13
+120
+
+15
+121
+
+49
+495019
+
+73
+737419
+
+34
+343519
+M
+38G
+383926 *
+1 (28:5B$
+
+
+11
+27
+
+
+13
+40
+
+
+15
+41
+
+53
+535419
+R
+114K
+11411577 *
+1B B(28:5B&
+
+
+11
+12
+
+13
+116
+
+15
+117
+M
+85G
+858677 *
+1& &(28:5B$
+
+
+11
+12
+
+
+13
+87
+
+
+15
+88
+R
+122K
+12212377 *
+1J J(28:5B&
+
+
+11
+12
+
+13
+124
+
+15
+125
+
+36
+363719
+
+55
+555619
+M
+89G
+899077 *
+1* *(28:5B$
+
+
+11
+12
+
+
+13
+91
+
+
+15
+92
+
+51
+515219
+
+69
+697019
+
+46
+464719
+
+65
+656619
+M
+80G
+808177 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+82
+
+
+15
+16
+M
+61G
+616226 *
+1 ('28:5B$
+
+
+11
+27
+
+
+13
+63
+
+
+15
+64
+G
+8B
+8910 *
+1	 	(:5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+N
+97H
+979877 *
+12 2(28:5B%
+
+
+11
+12
+
+
+13
+99
+
+15
+100
+R
+106K
+10610777 *
+1: :(28:5B&
+
+
+11
+12
+
+13
+108
+
+15
+109
+
+21
+212219
+
+30
+303119
+
+32
+323319
+M
+42G
+424326 *
+1 (28:5B$
+
+
+11
+27
+
+
+13
+44
+
+
+15
+45
+R
+110K
+11011177 *
+1> >(&28:5B&
+
+
+11
+12
+
+13
+112
+
+15
+113rå
+
+81720*
+1 (
+
+82123*
+1 (
+
+243020*
+1 (
+
+243223*
+1 (
+
+243420*
+1 (8
+
+243623*
+1 (
+
+424648*
+1 (
+
+424920*
+1 (
+
+425123*
+1 (
+
+425320*
+1 (4
+
+425523*
+1 (
+
+424623*
+1 (
+
+424623*
+1 (
+
+616520*
+1 ([
+
+616723*
+1 (
+
+616920*
+1 (
+
+617123*
+1 (
+
+617323*
+1 (
+
+75879*
+1 (
+
+804683*
+1' (+
+
+80879*
+1 (
+
+804648*
+1, (0
+
+804623*
+1' (+
+
+80823*
+1 	  (
+
+80884*
+1 	  (
+
+803884*
+1   (
+
+80823*
+1!	 !(
+
+80884*
+1!	 !(
+
+804623*
+1! !(
+
+804284*
+1! !(
+
+80823*
+1"	 "(
+
+80884*
+1"	 "(
+
+805784*
+1" "(
+
+852484*
+1' '(
+
+89823*
+1+	 +(
+
+89884*
+1+	 +(
+
+892484*
+1+ +(
+
+933884*
+1/ /(
+
+97823*
+13	 3(
+
+97884*
+13	 3(
+
+973884*
+13 3(
+
+10146105*
+16 6(
+
+1014623*
+16 6(
+
+1014623*
+17 7(
+
+1014284*
+17 7(
+
+1064683*
+1: :(
+
+1064648*
+1: :("
+
+1064623*
+1: :(
+
+106823*
+1;	 ;(
+
+106884*
+1;	 ;(
+
+1064623*
+1; ;(
+
+1064284*
+1; ;(
+
+1105784*
+1? ?(
+
+114823*
+1C	 C(
+
+114884*
+1C	 C(
+
+1145784*
+1C C(
+
+1187323*
+1F F(
+
+1186184*
+1G G(
+
+1227323*
+1J" J(-
+
+122823*
+1K	 K(
+
+122884*
+1K	 K(
+
+1226184*
+1K K(

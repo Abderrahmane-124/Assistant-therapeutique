@@ -1,0 +1,582 @@
+
+1.0'sonar-test-abdo_assistant-therapeutiqueJavaFrontend"1766137839221*java2.Bê
+i
+dBackend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/model/Journal.java2
+	
+type3
+	
+MAIN4
+
+package6
+.
+)com.example.assistant_therapeutique.model7
+6
+1com.example.assistant_therapeutique.model.Journal9
+
+class10
+
+access11
+
+public12
+
+
+full-range13
+
+(11:1)-(66:2)14
+
+simple-name15
+
+Journal16
+
+Entity18
+
+unknown19
+
+annotated by20
+$
+Recovered#typeBindingLEntity;022
+
+
+uses23
+:
+4com.example.assistant_therapeutique.model.Journal.id25
+
+field26
+
+private27
+
+(14:5)-(16:21)28
+
+id29
+
+Id31
+ 
+Recovered#typeBindingLId;033
+
+GeneratedValue35
+,
+&Recovered#typeBindingLGeneratedValue;037
+=
+7com.example.assistant_therapeutique.model.Journal.title39
+
+(18:5)-(18:26)40
+
+title41
+?
+9com.example.assistant_therapeutique.model.Journal.content43
+
+(19:5)-(19:28)44
+
+content45
+A
+;com.example.assistant_therapeutique.model.Journal.createdAt47
+
+(20:5)-(20:37)48
+
+	createdAt49
+<
+6com.example.assistant_therapeutique.model.Journal.user51
+
+(22:5)-(24:23)52
+
+
+user53
+4
+.com.example.assistant_therapeutique.model.User55
+
+is type56
+
+	ManyToOne58
+'
+!Recovered#typeBindingLManyToOne;060
+
+
+JoinColumn62
+(
+"Recovered#typeBindingLJoinColumn;064
+O
+Icom.example.assistant_therapeutique.model.Journal#getId()Ljava/lang/Long;66
+
+method67
+
+(27:5)-(29:6)68
+
+getId69
+
+
+references70
+P
+Jcom.example.assistant_therapeutique.model.Journal#setId(Ljava/lang/Long;)V72
+
+(31:5)-(33:6)73
+
+setId74
+T
+Ncom.example.assistant_therapeutique.model.Journal#getTitle()Ljava/lang/String;76
+
+(35:5)-(37:6)77
+
+getTitle78
+U
+Ocom.example.assistant_therapeutique.model.Journal#setTitle(Ljava/lang/String;)V80
+
+(39:5)-(41:6)81
+
+setTitle82
+V
+Pcom.example.assistant_therapeutique.model.Journal#getContent()Ljava/lang/String;84
+
+(43:5)-(45:6)85
+
+
+getContent86
+W
+Qcom.example.assistant_therapeutique.model.Journal#setContent(Ljava/lang/String;)V88
+
+(47:5)-(49:6)89
+
+
+setContent90
+_
+Ycom.example.assistant_therapeutique.model.Journal#getCreatedAt()Ljava/time/LocalDateTime;92
+
+(51:5)-(53:6)93
+
+getCreatedAt94
+`
+Zcom.example.assistant_therapeutique.model.Journal#setCreatedAt(Ljava/time/LocalDateTime;)V96
+
+(55:5)-(57:6)97
+
+setCreatedAt98
+r
+kcom.example.assistant_therapeutique.model.Journal#getUser()Lcom/example/assistant_therapeutique/model/User;100
+
+(59:5)-(61:6)101
+
+getUser102
+
+returns103
+s
+lcom.example.assistant_therapeutique.model.Journal#setUser(Lcom/example/assistant_therapeutique/model/User;)V105
+
+(63:5)-(65:6)106
+
+setUser107
+
+	has param108J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576jÎ
+
+17
+171819
+M
+75G
+757667 *
+1# #(28:5B$
+
+
+11
+12
+
+
+13
+77
+
+
+15
+78
+M
+38G
+383926 *
+1 (28:5B$
+
+
+11
+27
+
+
+13
+40
+
+
+15
+41
+
+57
+575819
+M
+83G
+838467 *
+1+ +(28:5B$
+
+
+11
+12
+
+
+13
+85
+
+
+15
+86
+
+34
+343519
+
+61
+616219
+M
+65G
+656667 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+68
+
+
+15
+69
+M
+95G
+959667 *
+17 7(28:5B$
+
+
+11
+12
+
+
+13
+97
+
+
+15
+98
+
+36
+363719
+M
+79G
+798067 *
+1' '(28:5B$
+
+
+11
+12
+
+
+13
+81
+
+
+15
+82
+M
+42G
+424326 *
+1 (28:5B$
+
+
+11
+27
+
+
+13
+44
+
+
+15
+45
+
+63
+636419
+P
+99J
+9910067 *
+1; ;(28:5B&
+
+
+11
+12
+
+13
+101
+
+15
+102
+M
+87G
+878867 *
+1/ /(28:5B$
+
+
+11
+12
+
+
+13
+89
+
+
+15
+90
+
+59
+596019
+M
+50G
+505126 *
+1 (28:5B$
+
+
+11
+27
+
+
+13
+52
+
+
+15
+53
+
+54
+545519
+M
+71G
+717267 *
+1 (28:5B$
+
+
+11
+12
+
+
+13
+73
+
+
+15
+74
+M
+46G
+464726 *
+1 ($28:5B$
+
+
+11
+27
+
+
+13
+48
+
+
+15
+49
+
+21
+212219
+M
+24G
+242526 *
+1 (28:5B$
+
+
+11
+27
+
+
+13
+28
+
+
+15
+29
+M
+91G
+919267 *
+13 3(&28:5B$
+
+
+11
+12
+
+
+13
+93
+
+
+15
+94
+
+30
+303119
+G
+8B
+8910 *
+1 (:5B$
+
+
+11
+12
+
+
+13
+14
+
+
+15
+16
+
+32
+323319
+R
+104K
+10410567 *
+1? ?(28:5B&
+
+
+11
+12
+
+13
+106
+
+15
+107rµ
+
+81720*
+1 (
+
+82123*
+1 (
+
+243020*
+1 (
+
+243223*
+1 (
+
+243420*
+1 (8
+
+243623*
+1 (
+
+505456*
+1 (
+
+505720*
+1 (
+
+505923*
+1 (
+
+506120*
+1 (4
+
+506323*
+1 (
+
+505423*
+1 (
+
+505423*
+1 (
+
+652470*
+1 (
+
+71823*
+1 	  (
+
+71870*
+1 	  (
+
+712470*
+1   (
+
+753870*
+1$ $(
+
+79823*
+1(	 ((
+
+79870*
+1(	 ((
+
+793870*
+1( ((
+
+834270*
+1, ,(
+
+87823*
+10	 0(
+
+87870*
+10	 0(
+
+874270*
+10 0(
+
+914670*
+14 4(
+
+95823*
+18	 8(
+
+95870*
+18	 8(
+
+954670*
+18 8(
+
+9954103*
+1; ;(
+
+995423*
+1; ;(
+
+995423*
+1< <(
+
+995070*
+1< <(
+
+10454108*
+1? ?(
+
+1045456*
+1? ?("
+
+1045423*
+1? ?(
+
+104823*
+1@	 @(
+
+104870*
+1@	 @(
+
+1045423*
+1@ @(
+
+1045070*
+1@ @(

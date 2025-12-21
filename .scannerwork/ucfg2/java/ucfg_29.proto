@@ -1,0 +1,15 @@
+
+^com.example.assistant_therapeutique.model.Conversation#getCreatedAt()Ljava/time/LocalDateTime;»
+°C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/model/Conversation.java> >(%"1*Ö
+1? ?(™
+–
+? ?(
+%0java.time.LocalDateTime"__id*e
+
+__unknown_file (I*G8
+6com.example.assistant_therapeutique.model.Conversation"
+	createdAt"+
+? ?(
+
+%0java.time.LocalDateTimeB:8
+6com.example.assistant_therapeutique.model.ConversationH

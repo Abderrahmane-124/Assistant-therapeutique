@@ -1,0 +1,16 @@
+
+¬com.example.assistant_therapeutique.service.ConversationService#saveConversation(Lcom/example/assistant_therapeutique/model/Conversation;)Lcom/example/assistant_therapeutique/model/Conversation;ƒ
+πC:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/service/ConversationService.java. .(("1*Å
+1/ /(%›
+⁄
+/ /(%K
+%0Ecom.example.assistant_therapeutique.repository.ConversationRepository"__id*{
+
+__unknown_file (_*]A
+?com.example.assistant_therapeutique.service.ConversationService"
+conversationRepository"
+/ /(9
+"":R
+.) .(BF
+conversation6com.example.assistant_therapeutique.model.ConversationBCA
+?com.example.assistant_therapeutique.service.ConversationServiceH

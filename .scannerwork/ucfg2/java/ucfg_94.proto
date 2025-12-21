@@ -1,0 +1,48 @@
+
+§com.example.assistant_therapeutique.service.ConversationService#updateTitle(Ljava/lang/Long;Ljava/lang/String;)Lcom/example/assistant_therapeutique/model/Conversation;Ä
+¹C:/Users/abder/Desktop/5IIR/Dev MultiPlatforme/Assistant-thearpeutique/Backend_Assistant_therapeutique/src/main/java/com/example/assistant_therapeutique/service/ConversationService.java6 6(#"1*®
+17$ 7(:Ý
+Ú
+7$ 7(:K
+%0Ecom.example.assistant_therapeutique.repository.ConversationRepository"__id*{
+
+__unknown_file (_*]A
+?com.example.assistant_therapeutique.service.ConversationService"
+conversationRepository˜
+•
+8 8(\
+%1"__declareFunction*p
+
+__unknown_file (TR
+P__sonar_lambda_0$com.example.assistant_therapeutique.service.ConversationService~
+|
+7 8(^F
+conversation6com.example.assistant_therapeutique.model.Conversation"__id*"
+
+__unknown_file (
+""¯¬
+9 9('
+
+%3void"Tcom.example.assistant_therapeutique.model.Conversation#setTitre(Ljava/lang/String;)V*d
+
+__unknown_file (H
+F
+conversation6com.example.assistant_therapeutique.model.Conversation*:
+
+__unknown_file (
+
+newTitlejava.lang.String2setTitre(Ljava/lang/String;)Ý
+Ú
+: :(%K
+%4Ecom.example.assistant_therapeutique.repository.ConversationRepository"__id*{
+
+__unknown_file (_*]A
+?com.example.assistant_therapeutique.service.ConversationService"
+conversationRepository"
+: :(9
+"": 
+6$ 6(,
+idjava.lang.Long:(
+6- 6(<
+newTitlejava.lang.StringBCA
+?com.example.assistant_therapeutique.service.ConversationServiceH
