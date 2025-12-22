@@ -51,10 +51,40 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- SpringDoc OpenAPI (Swagger UI) -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+
         <!-- Tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- H2 Database for Integration Tests -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Allure JUnit 5 for Test Reports -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.21.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- AspectJ Weaver (required by Allure) -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.19</version>
             <scope>test</scope>
         </dependency>
 
@@ -130,13 +160,47 @@
                 </executions>
             </plugin>
 
-            <!-- Ensure Surefire uses JaCoCo agent -->
+            <!-- Ensure Surefire uses JaCoCo agent and Allure -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
                     <argLine>${argLine}</argLine>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+
+            <!-- Allure Maven Plugin for HTML Reports -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.12.0</version>
+                <configuration>
+                    <reportVersion>2.21.0</reportVersion>
+                </configuration>
+            </plugin>
+
+            <!-- OWASP Dependency-Check for Security Vulnerability Scanning -->
+            <!-- Run with: mvn dependency-check:check -DnvdApiKey=YOUR_API_KEY -->
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>9.0.7</version>
+                <configuration>
+                    <failBuildOnCVSS>8</failBuildOnCVSS>
+                    <formats>
+                        <format>HTML</format>
+                        <format>JSON</format>
+                    </formats>
+                    <outputDirectory>${project.build.directory}/dependency-check</outputDirectory>
+                    <!-- NVD API Key passed via command line: -DnvdApiKey=xxx -->
+                    <nvdApiKey>${nvdApiKey}</nvdApiKey>
+                    <!-- Continue with OSS Index if NVD fails (new keys can take 24h to activate) -->
+                    <failOnError>false</failOnError>
+                    <ossindexAnalyzerEnabled>true</ossindexAnalyzerEnabled>
                 </configuration>
             </plugin>
         </plugins>

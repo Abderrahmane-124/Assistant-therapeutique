@@ -1,0 +1,15 @@
+com\example\assistant_therapeutique\service\MoodServiceTest.class
+com\example\assistant_therapeutique\service\ChatMessageServiceTest.class
+com\example\assistant_therapeutique\service\JournalServiceTest.class
+com\example\assistant_therapeutique\integration\MoodControllerIntegrationTest.class
+com\example\assistant_therapeutique\controller\MoodControllerTest.class
+com\example\assistant_therapeutique\integration\AuthControllerIntegrationTest.class
+com\example\assistant_therapeutique\controller\ConversationControllerTest.class
+com\example\assistant_therapeutique\controller\AuthControllerTest.class
+com\example\assistant_therapeutique\integration\JournalControllerIntegrationTest.class
+com\example\assistant_therapeutique\controller\UserControllerTest.class
+com\example\assistant_therapeutique\controller\ChatMessageControllerTest.class
+com\example\assistant_therapeutique\service\UserServiceTest.class
+com\example\assistant_therapeutique\controller\JournalControllerTest.class
+com\example\assistant_therapeutique\service\AiServiceTest.class
+com\example\assistant_therapeutique\service\ConversationServiceTest.class

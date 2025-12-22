@@ -8,39 +8,86 @@ Ce projet utilise une stratégie de tests unitaires ciblée sur les couches cont
 
 ## Backend (Java/Spring Boot)
 
-### Type de tests
-- **Tests unitaires** avec mocking des dépendances
+### Types de tests
+
+| Type | Description |
+|------|-------------|
+| **Tests unitaires** | Tests isolés avec mocking des dépendances |
+| **Tests d'intégration** | Tests complets avec base de données H2 in-memory |
 
 ### Technologies utilisées
+
 | Outil | Rôle |
 |-------|------|
 | JUnit 5 | Framework de tests |
 | Mockito | Mocking des dépendances |
 | Spring Boot Test | Support pour tests Spring |
+| MockMvc | Simulation des requêtes HTTP |
+| H2 Database | Base de données in-memory pour tests d'intégration |
 | JaCoCo | Couverture de code |
+| **Allure** | Rapports visuels HTML interactifs |
 
-### Parties testées ✅
+### Tests Unitaires ✅
+
 | Couche | Fichiers | Justification |
 |--------|----------|---------------|
 | **Controllers** | 6/7 | Logique de routing et validation des requêtes |
 | **Services** | 6/6 | Cœur de la logique métier |
 
+### Tests d'Intégration ✅
+
+| Controller | Tests | Endpoints testés |
+|------------|-------|------------------|
+| **AuthController** | 3 | Register, Login (success/failure) |
+| **JournalController** | 6 | CRUD complet (Create, Read, Update, Delete) |
+| **MoodController** | 7 | CRUD complet + validation |
+| **UserController** | 7 | GetById, Update, Stats |
+| **ConversationController** | 7 | CRUD + UpdateTitle |
+| **TOTAL** | **30** | |
+
+> **Note** : `ChatMessageController` et `CustomErrorController` sont exclus car ils dépendent de services externes (AI) ou sont génériques.
+
 ### Parties exclues ❌
+
 | Couche | Justification |
 |--------|---------------|
 | **Models/Entities** | Classes générées par Lombok (`@Data`) - aucune logique |
 | **DTOs** | Simples transporteurs de données |
-| **Repositories** | Interfaces Spring Data - testées implicitement via les services |
+| **Repositories** | Interfaces Spring Data - testées implicitement via intégration |
 | **Config** | Configuration déclarative (CORS, etc.) |
 | **Application.java** | Point d'entrée Spring Boot |
 
-### Commande d'exécution
+### Commandes d'exécution
+
+#### Exécuter tous les tests (unitaires + intégration)
 ```bash
 cd Backend_Assistant_therapeutique
 mvn clean verify
 ```
 
----
+#### Générer et voir le rapport Allure (interface visuelle)
+```bash
+# Après avoir exécuté les tests
+mvn allure:serve
+```
+> 🌐 Un serveur local démarre et ouvre le rapport dans votre navigateur
+
+#### Générer le rapport sans ouvrir le navigateur
+```bash
+mvn allure:report
+# Rapport généré dans target/site/allure-maven-plugin/
+```
+
+### Rapport Allure - Fonctionnalités
+
+Le rapport Allure offre :
+- 📊 **Dashboard** : Vue d'ensemble des résultats
+- 📈 **Graphiques** : Taux de réussite, durée des tests
+- 🏷️ **Catégories** : Tests groupés par Epic/Feature/Story
+- 📝 **Détails** : Stack traces, descriptions, sévérité
+- 📜 **Historique** : Évolution des tests au fil du temps
+
+
 
 ## Frontend (Flutter/Dart)
 

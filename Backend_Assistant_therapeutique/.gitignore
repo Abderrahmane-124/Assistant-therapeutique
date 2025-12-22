@@ -1,0 +1,21 @@
+# Maven
+target/
+
+# IDE
+.idea/
+*.iml
+
+# Allure
+.allure/
+allure-results/
+htmlReport/
+
+# AspectJ crash logs
+ajcore.*.txt
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
